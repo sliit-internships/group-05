@@ -19,15 +19,56 @@ body, html {height: 100%}
 </style>
 <body>
 
-<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-  <div class="w3-display-topleft w3-padding-large w3-xlarge"  style="text-align:center; background-color:DodgerBlue;">
-    Your Registration was Successful...
+<div class="containerr">
+ <h1>Feedback</h1>	
+  <form action="Feedback" method="post">
+  <div class="row">
+    <div class="col-25">
+      <label for="fname">Feedback ID</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="Fid" name="Fid"  required>
+    </div>
   </div>
-  <div class="w3-display-middle">
-    <h1 class="w3-jumbo w3-animate-top"  style="background-color:DodgerBlue; text-align:center">HOME PAGE COMING SOON</h1>
-    <hr class="w3-border-grey" style="margin:auto; width:40%;">
-    <p class="w3-large w3-center" style="background-color:#000; align-content:center; width:40%;">5 days left</p>
+  <div class="row">
+    <div class="col-25">
+      <label for="lname">Customer Name</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="Fname" name="Fname"  required>
+    </div>
   </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="lname">Date</label>
+    </div>
+    <div class="col-75">
+      <input type="date" id="Fdate" name="Fdate"  required>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="lname">Email</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="Femail" name="Femail"  required>
+    </div>
+  </div>
+   <div class="row">
+    <div class="col-25">
+      <label for="lname">Description</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="Fdes" name="Fdes"  required>
+    </div>
+  </div>
+  
+<br>
+
+  <div class="row">
+    <input type="submit" value="Submit">
+  </div>
+  </form>
 </div>
 
 </body>

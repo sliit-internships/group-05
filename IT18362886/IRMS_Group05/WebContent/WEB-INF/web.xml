@@ -5,8 +5,8 @@
 	id="WebApp_ID" version="4.0">
 	<display-name>IRMS_Group05</display-name>
 	<welcome-file-list>
-		<welcome-file>RegisterHome.jsp</welcome-file>
 		<welcome-file>Home.jsp</welcome-file>
+		<welcome-file>RegisterHome.jsp</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>default.html</welcome-file>
 		<welcome-file>default.htm</welcome-file>
