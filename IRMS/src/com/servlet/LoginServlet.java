@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "root");
 			Statement stmt = con.createStatement();
 			String query = "select * from new_table where email='"+email+"' and password='"+password+"'";
 			

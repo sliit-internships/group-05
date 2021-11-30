@@ -9,7 +9,26 @@
 <meta name="description" content="au theme template">
 <meta name="author" content="Hau Nguyen">
 <meta name="keywords" content="au theme template">
-
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%
+String id = request.getParameter("id");
+String driver = "com.mysql.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "admindb";
+String userid = "root";
+String password = "root";
+try {
+Class.forName(driver);
+} catch (ClassNotFoundException e) {
+e.printStackTrace();
+}
+Connection connection = null;
+Statement statement = null;
+ResultSet resultSet = null;
+%>
 <!-- Title Page-->
 <title>Student Dashboard</title>
 
@@ -316,113 +335,34 @@
 												<th>Student ID</th>
 												<th>Full Name</th>
 												<th>Specialization</th>
-												<th>Student E-Mail</th>
-												<th>Supervisor E-Mail</th>
-												<th class="text-right">Mobile Numbers</th>
-												<th class="text-right">Internship Start Date</th>
-												<th class="text-right">Current Year of Registration</th>
-												<th class="text-right">Plan to Complete 2nd Year</th>
-												<th class="text-right">Period of Complete 2nd Year</th>
+
+
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-										</tbody>
+										<%
+					try {
+						Class.forName("com.mysql.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "root");
+						Statement stmt = con.createStatement();
+						ResultSet rs = stmt.executeQuery("select * from admindb.internship_registered_student");
+						while (rs.next()) {
+					%>
+					<tr>
+						<td><%=rs.getString("id")%></td>
+						<td><%=rs.getString("name")%></td>
+						<td><%=rs.getString("email")%></td>
+
+						
+					</tr>
+
+
+					<%
+					}
+
+					} catch (Exception e) {
+					e.printStackTrace();
+					}
+					%>
 									</table>
 								</div>
 							</div>
@@ -477,6 +417,5 @@
 </html>
 <!-- end document-->
 
-Student ID
-
-
+Student ID © 2021 GitHub, Inc. Terms Privacy Security Status Docs
+Contact GitHub Pricing API Training Blog About Loading complete

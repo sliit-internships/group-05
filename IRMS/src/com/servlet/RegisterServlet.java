@@ -19,9 +19,9 @@ public class RegisterServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		res.setContentType("text/html");
-		name = req.getParameter("studentName");
-		email = req.getParameter("studentEmail");
-		password = req.getParameter("studentPassword");
+		name = req.getParameter("name");
+		email = req.getParameter("email");
+		password = req.getParameter("password");
 
 		/*
 		 * PrintWriter out = res.getWriter(); out.println(name);
@@ -29,9 +29,10 @@ public class RegisterServlet extends HttpServlet {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "root");
 			String query = "insert into new_table(name,email,password) values(?,?,?)";
 			PreparedStatement ps = con.prepareStatement(query);
+
 
 			ps.setString(1, name);
 			ps.setString(2, email);
@@ -39,7 +40,7 @@ public class RegisterServlet extends HttpServlet {
 
 			ps.executeUpdate();
 
-			/* out.println("Data Insert Successfully !!!"); */
+			System.out.println("Data Insert Successfully !!!");
 			RequestDispatcher dispatcher = req.getRequestDispatcher("studentLogin.jsp");
 	    	dispatcher.forward(req, res);
 	    	

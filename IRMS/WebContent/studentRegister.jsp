@@ -25,21 +25,21 @@
 			<form action="register" method="post">
 				<div class="form-group">
 					<label for="username">User name</label> <input type="text"
-						name="studentName" id="username" class="w-100" autofocus
+						name="name" id="name" class="w-100" autofocus
 						placeholder="jhon smith" title="Must be longer than 4 characters"
 						required> <span class="check-icon"></span>
 				</div>
 
 				<div class="form-group">
 					<label for="email">Email Address</label> <input type="text"
-						name="studentEmail" id="email" class="w-100"
+						name="email" id="email" class="w-100"
 						placeholder="itxxxxxxxx@my.sliit.lk" required> <span
 						class="check-icon"></span>
 				</div>
 
 				<div class="form-group mb-1">
 					<label for="password">Password</label> <input type="password"
-						name="studentPassword" id="password" class="w-100"
+						name="password" id="password" class="w-100"
 						title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
 						placeholder="letters, numbers, and symbols" required> <span class="check-icon"></span>
 				</div>
