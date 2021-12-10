@@ -21,7 +21,7 @@
   <hr>
   <div class='_1'>LOGIN FAIL</div><br/>
   <div class='_2'>AUTHENTICATION DETAILS NOT MATCHING</div><br/>
-  <a class='btn' href='studentLogin.jsp'>BACK TO LOGIN</a>
+  <a class='btn' href='systemLogin.jsp'>BACK TO LOGIN</a>
 </div>
 </body>
 </html>

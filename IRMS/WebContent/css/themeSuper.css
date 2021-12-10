@@ -660,7 +660,6 @@ section {
     display: -moz-box;
     display: -ms-flexbox;
     display: flex;
-    max-width: 991px
 }
 
 @media (max-width: 991px) {

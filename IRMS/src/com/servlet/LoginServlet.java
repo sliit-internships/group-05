@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
 			Statement stmt = con.createStatement();
-			String query = "select * from new_table where email='"+email+"' and password='"+password+"'";
+			String query = "select * from system_register where email='"+email+"' and password='"+password+"'";
 			
 			ResultSet rs = stmt.executeQuery(query);
 			
@@ -41,7 +41,9 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher dispatcher = req.getRequestDispatcher("adminHome.jsp");
 		    	dispatcher.forward(req, res);
 			}else {
-				out.println("Login Fail ...!");
+				/* out.println("Login Fail ...!"); */
+				RequestDispatcher dispatcher = req.getRequestDispatcher("error404.jsp");
+		    	dispatcher.forward(req, res);
 			}
 		}catch (Exception e) {
 			out.println(e);

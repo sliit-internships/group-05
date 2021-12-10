@@ -42,7 +42,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="#" style="font-size:35px;">
+                        <a class="logo" href="adminHome.jsp" style="font-size:35px;">
                             <span>SLIIT IRMS </span>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -86,7 +86,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#" style="font-size:35px;">
+                <a href="adminHome.jsp" style="font-size:35px;">
                     <span>SLIIT IRMS </span>
                 </a>
             </div>
@@ -280,7 +280,7 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
+                                                <a href="/logout">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>

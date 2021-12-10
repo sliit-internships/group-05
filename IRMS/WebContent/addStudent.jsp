@@ -22,9 +22,9 @@ String database = "admindb";
 String userid = "root";
 String password = "11111";
 try {
-Class.forName(driver);
+	Class.forName(driver);
 } catch (ClassNotFoundException e) {
-e.printStackTrace();
+	e.printStackTrace();
 }
 Connection connection = null;
 Statement statement = null;
@@ -64,6 +64,25 @@ ResultSet resultSet = null;
 <!-- Main CSS-->
 <link href="./css/themeStudent.css" rel="stylesheet" media="all">
 
+
+<!-- Icons font CSS-->
+<link href="vendor/mdi-font/css/material-design-iconic-font.min.css"
+	rel="stylesheet" media="all">
+<link href="vendor/font-awesome-4.7/css/font-awesome.min.css"
+	rel="stylesheet" media="all">
+<!-- Font special for pages-->
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
+	rel="stylesheet">
+
+<!-- Vendor CSS-->
+<link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="vendor/datepicker/daterangepicker.css" rel="stylesheet"
+	media="all">
+
+<!-- Main CSS-->
+<link href="css/AddStudent.css" rel="stylesheet" media="all">
+
 </head>
 
 <body class="animsition">
@@ -73,8 +92,8 @@ ResultSet resultSet = null;
 			<div class="header-mobile__bar">
 				<div class="container-fluid">
 					<div class="header-mobile-inner">
-						<a class="logo" href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT
-								IRMS </span>
+						<a class="logo" href="adminHome.jsp" style="font-size: 35px;">
+							<span>SLIIT IRMS </span>
 						</a>
 						<button class="hamburger hamburger--slider" type="button">
 							<span class="hamburger-box"> <span class="hamburger-inner"></span>
@@ -112,7 +131,8 @@ ResultSet resultSet = null;
 		<!-- MENU SIDEBAR-->
 		<aside class="menu-sidebar d-none d-lg-block">
 			<div class="logo">
-				<a href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT IRMS </span>
+				<a href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT
+						IRMS </span>
 				</a>
 			</div>
 			<div class="menu-sidebar__content js-scrollbar1">
@@ -148,7 +168,8 @@ ResultSet resultSet = null;
 			<header class="header-desktop">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<div class="header-wrap" style="display: flex; justify-content: right; align-items: right;">
+						<div class="header-wrap"
+							style="display: flex; justify-content: right; align-items: right;">
 							<!-- <form class="form-header" action="" method="POST">
 								<input class="au-input au-input--xl" type="text" name="search"
 									placeholder="Search for datas &amp; reports..." />
@@ -326,186 +347,147 @@ ResultSet resultSet = null;
                             </div>
                         </div> -->
 
-						<div class="row">
-							<div class="col-lg-9">
-								<h2 class="title-1 m-b-25">Summary</h2>
-								<form class="form-header" action="" method="POST"
-									style="margin-bottom: 25px;">
-									<input class="au-input au-input--xl" type="text" name="search"
-										placeholder="Search for datas &amp; reports..." />
-									<button class="au-btn--submit" type="submit">
-										<i class="zmdi zmdi-search"></i>
-									</button>
-									<a href="addStudent.jsp" style="margin-left:600px" class="au-btn--submit" type="submit" >
-										<i class="zmdi zmdi-plus"></i>
-									</a>
-								</form>
-								<div class="table-responsive table--no-card m-b-40">
-									<table
-										class="table table-borderless table-striped table-earning">
-										<thead>
-											<tr>
-												<th class="text-right">Student ID</th>
-												<th class="text-right">Full Name</th>
-												<th class="text-right">Specialization</th>
-												<th class="text-right">Student E-Mail</th>
-												<th class="text-right">Supervisor E-Mail</th>
-												<th class="text-right">Mobile Numbers</th>
-												<th class="text-right">Internship Start Date</th>
-												<th class="text-right">Current Year of Registration</th>
-												<th class="text-right">Plan to Complete 2nd Year</th>
-												<th class="text-right">Period of Complete 2nd Year</th>
-											</tr>
-											<%
-											try {
-												Class.forName("com.mysql.jdbc.Driver");
-												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
-												Statement stmt = con.createStatement();
-												ResultSet rs = stmt.executeQuery("select * from admindb.student_details");
-												while (rs.next()) {
-											%>
-											<tr>
-												<td><%=rs.getString("s_id")%></td>
-												<td><%=rs.getString("s_name")%></td>
-												<td><%=rs.getString("s_specialization")%></td>
-												<td><%=rs.getString("s_email")%></td>
-												<td><%=rs.getString("super_email")%></td>
-												<td><%=rs.getString("s_mobile")%></td>
-												<td><%=rs.getString("s_intern_start")%></td>
-												<td><%=rs.getString("s_current_year")%></td>
-												<td><%=rs.getString("s_plan_2year")%></td>
-												<td><%=rs.getString("s_period_2year")%></td>
 
-											</tr>
-											<%
-											}
+						<div class="page-wrapper font-robo">
+							<div class="card card-2">
+								<div class="card-heading">
+									<a href="studentDetails.jsp"
+										style="margin-left: 50px; color: #fff; font-weight: 400; font-size: 15px; border: solid; padding: 10px 10px; border-radius: 5px;"
+										type="submit"> Go Back </a>
+								</div>
+								<div class="card-body">
+									<h2 class="title">Registration Info</h2>
+									<form method="POST">
 
-											} catch (Exception e) {
-											e.printStackTrace();
-											}
-											%>
-										</thead>
-										
-										
-										
-										<!-- <tbody>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-										</tbody> -->
-									</table>
+										<div class="col-8">
+											<div class="input-group">
+												<label for="email" style="font-size: 1.1rem;">SLIIT
+													Student Identification Number</label><input class="input--style-2"
+													type="text" placeholder="Student Id" name="studentId">
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="input-group">
+												<label for="email" style="font-size: 1.1rem;">Student
+													Name</label><input class="input--style-2" type="text"
+													placeholder="Student Name" name="studentName">
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="input-group">
+												<label for="email" style="font-size: 1.1rem;">Specialization</label><input
+													class="input--style-2" type="text"
+													placeholder="Specialization" name="Specialization">
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="input-group">
+												<label for="email" style="font-size: 1.1rem;">Student
+													E-Mail</label><input class="input--style-2" type="text"
+													placeholder="Student E-Mail" name="studentEmail">
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="input-group">
+												<label for="email" style="font-size: 1.1rem;">Supervisor
+													E-Mail</label><input class="input--style-2" type="text"
+													placeholder="Supervisor E-Mail" name="supervisorEmail">
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="input-group">
+												<label for="email" style="font-size: 1.1rem;">Mobile
+													Number</label><input class="input--style-2" type="text"
+													placeholder="Mobile Number" name="stuMobileNumber">
+											</div>
+										</div>
+
+										<div class="col-8">
+											<div class="input-group">
+												<label for="email" style="font-size: 1.1rem;">Internship
+													Start Date</label><input class="input--style-2 js-datepicker"
+													type="text" placeholder="Internship Start Date"
+													name="internshipStartDate"> <i
+													class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+											</div>
+										</div>
+
+										<div class="col-8">
+											<div class="input-group">
+												<div class="rs-select2 js-select-simple select--no-search">
+													<label for="email" style="font-size: 1.1rem;">Current
+														Year of Registration</label><select name="class">
+														<option disabled="disabled" selected="selected">Current
+															Year of Registration</option>
+														<option>Year 1</option>
+														<option>Year 2</option>
+														<option>Year 3</option>
+														<option>Year 4</option>
+													</select>
+													<div class="select-dropdown"></div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-8">
+											<div class="input-group">
+												<label for="email" style="font-size: 1.1rem;">Plan
+													to Complete 2nd Year</label><input
+													class="input--style-2 js-datepicker" type="text"
+													placeholder="Plan to Complete 2nd Year"
+													name="plantoComplete2ndYear"> <i
+													class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+											</div>
+										</div>
+
+										<div class="col-8">
+											<div class="input-group">
+												<div class="rs-select2 js-select-simple select--no-search">
+													<label for="email" style="font-size: 1.1rem;">SLIIT
+														Student Email</label><select name="class">
+														<option disabled="disabled" selected="selected">Period
+															of Complete 2nd Year</option>
+														<option>January - June</option>
+														<option>June - November</option>
+													</select>
+													<div class="select-dropdown"></div>
+												</div>
+											</div>
+										</div>
+										<div class="p-t-30">
+											<button class="btn btn--radius btn--green" type="submit">Submit</button>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="copyright">
-									<p>Copyright© 2021. All rights reserved.</p>
-								</div>
-							</div>
-						</div>
-
 					</div>
+
 				</div>
 			</div>
-			<!-- END MAIN CONTENT-->
-			<!-- END PAGE CONTAINER-->
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="copyright">
+					<p>Copyright© 2021. All rights reserved.</p>
+				</div>
+			</div>
 		</div>
 
 	</div>
+	<!-- END MAIN CONTENT-->
+	<!-- END PAGE CONTAINER-->
+
+
+	<!-- Jquery JS-->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<!-- Vendor JS-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="vendor/datepicker/moment.min.js"></script>
+	<script src="vendor/datepicker/daterangepicker.js"></script>
+
+	<!-- Main JS-->
+	<script src="js/global.js"></script>
 
 	<!-- Jquery JS-->
 	<script src="vendor/jquery-3.2.1.min.js"></script>
