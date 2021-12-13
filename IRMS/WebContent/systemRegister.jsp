@@ -110,9 +110,9 @@ select, option {
 				</div>
 
 				<div class="form-group">
-					<label for="email">Email Address</label> <input type="text"
+					<label for="email">SLIIT Email Address</label> <input type="text"
 						name="email" id="email" class="w-100"
-						placeholder="itxxxxxxxx@my.sliit.lk" required> <span
+						placeholder="xxxxxxxx@sliit.lk" required> <span
 						class="check-icon"></span>
 				</div>
 
@@ -141,15 +141,6 @@ select, option {
 						Minimum <b>8 characters</b>
 					</p>
 				</div>
-
-				<!-- <div class="form-group mb-1">
-					<label for="password">Password</label>
-					<div id="myPassword" name="password"
-						class="w-100" >
-						<span class="check-icon"></span>
-					</div>
-				</div> -->
-
 				<div class="form-group mb-1" style="margin-top: 40px;">
 					<label for="securityQuestion"
 						style="display: flex; justify-content: right; align-items: right;">Security
@@ -170,20 +161,6 @@ select, option {
 						name="answer" id="answer" class="w-100" placeholder="Answer"
 						required> <span class="check-icon"></span>
 				</div>
-
-				<!-- <div class="form-group mb-1">
-					<label for="password">Password</label> <input type="password"
-						name="studentPassword" id="studentPassword" class="w-100"
-						placeholder="enter the password" required> <span
-						class="check-icon"></span>
-				</div>
-
-				<div class="form-group mb-1" style="margin-top:45px">
-					<label for="password1">Confirm Password</label> <input type="password"
-						name="studentPassword1" id="studentPassword1" class="w-100"
-						placeholder="re-enter the password" required> <span
-						class="check-icon"></span>
-				</div> -->
 
 				<div class="form-group text-left mb-2" style="margin-top: 10px">
 					<input type="checkbox" checked> <label for="" class="terms">

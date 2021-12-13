@@ -10,26 +10,7 @@
 <meta name="description" content="au theme template">
 <meta name="author" content="Hau Nguyen">
 <meta name="keywords" content="au theme template">
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
-<%
-String id = request.getParameter("id");
-String driver = "com.mysql.jdbc.Driver";
-String connectionUrl = "jdbc:mysql://localhost:3306/";
-String database = "admindb";
-String userid = "root";
-String password = "11111";
-try {
-	Class.forName(driver);
-} catch (ClassNotFoundException e) {
-	e.printStackTrace();
-}
-Connection connection = null;
-Statement statement = null;
-ResultSet resultSet = null;
-%>
+
 
 <!-- Title Page-->
 <title>Student Dashboard</title>
@@ -337,17 +318,6 @@ ResultSet resultSet = null;
 			<div class="main-content">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<!-- <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">overview</h2>
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
-                                </div>
-                            </div>
-                        </div> -->
-
-
 						<div class="page-wrapper font-robo">
 							<div class="card card-2">
 								<div class="card-heading">
@@ -357,13 +327,14 @@ ResultSet resultSet = null;
 								</div>
 								<div class="card-body">
 									<h2 class="title">Registration Info</h2>
-									<form method="POST">
+									<form name="studentform1" method="post"
+										action="addStudentProcess.jsp">
 
 										<div class="col-8">
 											<div class="input-group">
 												<label for="email" style="font-size: 1.1rem;">SLIIT
 													Student Identification Number</label><input class="input--style-2"
-													type="text" placeholder="Student Id" name="studentId">
+													type="text" placeholder="Student ID" name="studentId">
 											</div>
 										</div>
 										<div class="col-8">
@@ -375,9 +346,19 @@ ResultSet resultSet = null;
 										</div>
 										<div class="col-8">
 											<div class="input-group">
-												<label for="email" style="font-size: 1.1rem;">Specialization</label><input
-													class="input--style-2" type="text"
-													placeholder="Specialization" name="Specialization">
+												<div class="rs-select2 js-select-simple select--no-search">
+													<label for="email" style="font-size: 1.1rem;">Specialization</label><select
+														name="specialization">
+														<option disabled="disabled" selected="selected">Specialization</option>
+														<option value="IT">IT</option>
+														<option value="SE">SE</option>
+														<option value="CSNE">CSNE</option>
+														<option value="ISE">ISE</option>
+														<option value="CS">CS</option>
+														<option value="IM">IM</option>
+													</select>
+													<div class="select-dropdown"></div>
+												</div>
 											</div>
 										</div>
 										<div class="col-8">
@@ -416,13 +397,13 @@ ResultSet resultSet = null;
 											<div class="input-group">
 												<div class="rs-select2 js-select-simple select--no-search">
 													<label for="email" style="font-size: 1.1rem;">Current
-														Year of Registration</label><select name="class">
+														Year of Registration</label><select name="currentYear">
 														<option disabled="disabled" selected="selected">Current
 															Year of Registration</option>
-														<option>Year 1</option>
-														<option>Year 2</option>
-														<option>Year 3</option>
-														<option>Year 4</option>
+														<option value="Year 1">Year 1</option>
+														<option value="Year 2">Year 2</option>
+														<option value="Year 3">Year 3</option>
+														<option value="Year 4">Year 4</option>
 													</select>
 													<div class="select-dropdown"></div>
 												</div>
@@ -444,79 +425,78 @@ ResultSet resultSet = null;
 											<div class="input-group">
 												<div class="rs-select2 js-select-simple select--no-search">
 													<label for="email" style="font-size: 1.1rem;">SLIIT
-														Student Email</label><select name="class">
+														Student Email</label><select name="periodComplete2year">
 														<option disabled="disabled" selected="selected">Period
 															of Complete 2nd Year</option>
-														<option>January - June</option>
-														<option>June - November</option>
+														<option value="January - June">January - June</option>
+														<option value="June - November">June - November</option>
 													</select>
 													<div class="select-dropdown"></div>
 												</div>
 											</div>
 										</div>
 										<div class="p-t-30">
-											<button class="btn btn--radius btn--green" type="submit">Submit</button>
+											<input type="submit" class="btn btn--radius btn--green"
+												value="Add">
 										</div>
 									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="copyright">
-					<p>Copyright© 2021. All rights reserved.</p>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="copyright">
+						<p>Copyright© 2021. All rights reserved.</p>
+					</div>
 				</div>
 			</div>
+
 		</div>
-
-	</div>
-	<!-- END MAIN CONTENT-->
-	<!-- END PAGE CONTAINER-->
+		<!-- END MAIN CONTENT-->
+		<!-- END PAGE CONTAINER-->
 
 
-	<!-- Jquery JS-->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<!-- Vendor JS-->
-	<script src="vendor/select2/select2.min.js"></script>
-	<script src="vendor/datepicker/moment.min.js"></script>
-	<script src="vendor/datepicker/daterangepicker.js"></script>
+		<!-- Jquery JS-->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<!-- Vendor JS-->
+		<script src="vendor/select2/select2.min.js"></script>
+		<script src="vendor/datepicker/moment.min.js"></script>
+		<script src="vendor/datepicker/daterangepicker.js"></script>
 
-	<!-- Main JS-->
-	<script src="js/global.js"></script>
+		<!-- Main JS-->
+		<script src="js/global.js"></script>
 
-	<!-- Jquery JS-->
-	<script src="vendor/jquery-3.2.1.min.js"></script>
-	<!-- Bootstrap JS-->
-	<script src="vendor/bootstrap-4.1/popper.min.js"></script>
-	<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-	<!-- Vendor JS       -->
-	<script src="vendor/slick/slick.min.js">
-		
-	</script>
-	<script src="vendor/wow/wow.min.js"></script>
-	<script src="vendor/animsition/animsition.min.js"></script>
-	<script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-		
-	</script>
-	<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-	<script src="vendor/counter-up/jquery.counterup.min.js">
-		
-	</script>
-	<script src="vendor/circle-progress/circle-progress.min.js"></script>
-	<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-	<script src="vendor/chartjs/Chart.bundle.min.js"></script>
-	<script src="vendor/select2/select2.min.js">
-		
-	</script>
+		<!-- Jquery JS-->
+		<script src="vendor/jquery-3.2.1.min.js"></script>
+		<!-- Bootstrap JS-->
+		<script src="vendor/bootstrap-4.1/popper.min.js"></script>
+		<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+		<!-- Vendor JS       -->
+		<script src="vendor/slick/slick.min.js">
+			
+		</script>
+		<script src="vendor/wow/wow.min.js"></script>
+		<script src="vendor/animsition/animsition.min.js"></script>
+		<script
+			src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+			
+		</script>
+		<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+		<script src="vendor/counter-up/jquery.counterup.min.js">
+			
+		</script>
+		<script src="vendor/circle-progress/circle-progress.min.js"></script>
+		<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+		<script src="vendor/chartjs/Chart.bundle.min.js"></script>
+		<script src="vendor/select2/select2.min.js">
+			
+		</script>
 
-	<!-- Main JS-->
-	<script src="js/main.js"></script>
-
+		<!-- Main JS-->
+		<script src="js/main.js"></script>
 </body>
 
 </html>

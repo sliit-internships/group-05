@@ -3,12 +3,12 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%
-String id = request.getParameter("id");
 String driver = "com.mysql.jdbc.Driver";
 String connectionUrl = "jdbc:mysql://localhost:3306/";
 String database = "admindb";
 String userid = "root";
 String password = "11111";
+String studentId=request.getParameter("studentId");
 try {
 Class.forName(driver);
 } catch (ClassNotFoundException e) {
@@ -74,8 +74,8 @@ ResultSet resultSet = null;
 			<div class="header-mobile__bar">
 				<div class="container-fluid">
 					<div class="header-mobile-inner">
-						<a class="logo" href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT
-								IRMS </span>
+						<a class="logo" href="adminHome.jsp" style="font-size: 35px;">
+							<span>SLIIT IRMS </span>
 						</a>
 						<button class="hamburger hamburger--slider" type="button">
 							<span class="hamburger-box"> <span class="hamburger-inner"></span>
@@ -113,7 +113,8 @@ ResultSet resultSet = null;
 		<!-- MENU SIDEBAR-->
 		<aside class="menu-sidebar d-none d-lg-block">
 			<div class="logo">
-				<a href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT IRMS </span>
+				<a href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT
+						IRMS </span>
 				</a>
 			</div>
 			<div class="menu-sidebar__content js-scrollbar1">
@@ -149,7 +150,8 @@ ResultSet resultSet = null;
 			<header class="header-desktop">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<div class="header-wrap" style="display: flex; justify-content: right; align-items: right;">
+						<div class="header-wrap"
+							style="display: flex; justify-content: right; align-items: right;">
 							<!-- <form class="form-header" action="" method="POST">
 								<input class="au-input au-input--xl" type="text" name="search"
 									placeholder="Search for datas &amp; reports..." />
@@ -337,8 +339,9 @@ ResultSet resultSet = null;
 									<button class="au-btn--submit" type="submit">
 										<i class="zmdi zmdi-search"></i>
 									</button>
-									<a href="addStudent.jsp" style="margin-left:600px" class="au-btn--submit" type="submit" >
-										<i class="zmdi zmdi-plus"></i>
+									<a href="addStudent.jsp" style="margin-left: 600px"
+										class="au-btn--submit" type="submit"> <i
+										class="zmdi zmdi-plus"></i>
 									</a>
 								</form>
 								<div class="table-responsive table--no-card m-b-40">
@@ -360,6 +363,34 @@ ResultSet resultSet = null;
 											</tr>
 											<%
 											try {
+												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
+												Statement stmt = connection.createStatement();
+												String sql = "select * from student_details where studentId=" + studentId + "' ";
+												ResultSet rs= statement.executeQuery(sql);
+												while (resultSet.next()) {
+											%>
+											<tr>
+												<td><%=rs.getString("studentId")%></td>
+												<td><%=rs.getString("studentName")%></td>
+												<td><%=rs.getString("specialization")%></td>
+												<td><%=rs.getString("studentEmail")%></td>
+												<td><%=rs.getString("supervisorEmail")%></td>
+												<td><%=rs.getString("stuMobileNumber")%></td>
+												<td><%=rs.getString("internshipStartDate")%></td>
+												<td><%=rs.getString("currentYear")%></td>
+												<td><%=rs.getString("plantoComplete2ndYear")%></td>
+												<td><%=rs.getString("periodComplete2year")%></td>
+											</tr>
+											<%
+											}
+											connection.close();
+											} catch (Exception e) {
+											e.printStackTrace();
+											}
+											%>
+
+											<%-- <%
+											try {
 												Class.forName("com.mysql.jdbc.Driver");
 												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
 												Statement stmt = con.createStatement();
@@ -377,7 +408,7 @@ ResultSet resultSet = null;
 												<td><%=rs.getString("currentYear")%></td>
 												<td><%=rs.getString("plantoComplete2ndYear")%></td>
 												<td><%=rs.getString("periodComplete2year")%></td>
-												<%-- <td><a href="updateStudent.jsp?id=<%=resultSet.getString("studentId")%>">update</a></td> --%>
+												<td><a href="updateStudent.jsp?id=<%=resultSet.getString("studentId")%>">update</a></td>
 
 											</tr>
 											<%
@@ -386,109 +417,8 @@ ResultSet resultSet = null;
 											} catch (Exception e) {
 											e.printStackTrace();
 											}
-											%>
+											%> --%>
 										</thead>
-										
-										
-										
-										<!-- <tbody>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-										</tbody> -->
 									</table>
 								</div>
 							</div>

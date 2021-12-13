@@ -47,5 +47,14 @@
 		<servlet-name>studentLogout</servlet-name>
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>addStudent</servlet-name>
+		<servlet-class>com.servlet.AddStudentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>addStudent</servlet-name>
+		<url-pattern>/addStudentAction</url-pattern>
+	</servlet-mapping>
 
 </web-app>

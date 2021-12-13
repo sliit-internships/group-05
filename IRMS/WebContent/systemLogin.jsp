@@ -38,9 +38,9 @@
 			<form name="myform" action="login" method="post">
 
 				<div class="form-group">
-					<label for="email">SLIIT Student Email</label> <input type="text"
+					<label for="email">SLIIT Email</label> <input type="text"
 						name="email" id="email" class="w-100"
-						placeholder="itxxxxxxxx@my.sliit.lk" > <span
+						placeholder="xxxxxxxx@sliit.lk" > <span
 						class="check-icon"></span>
 				</div>
 
@@ -48,9 +48,11 @@
 					<label for="password">Password</label> <input type="password"
 						name="password" id="password" class="w-100"
 						title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-						placeholder="enter password" > <span class="check-icon"></span>
+						placeholder="enter your password" > <span class="check-icon"></span>
 				</div>
-				<small>Forget Password <a href="forgetPassword.jsp">Click here</a></small>
+				<div style="margin-left:-110px;">
+				<small>Did You Forget Password <a href="forgetPassword.jsp">Click here</a></small>
+				</div>
 
 				<div class="form-group text-left mb-2" style="margin-top:20px">
 					<input type="checkbox" checked> <label for="" class="terms">
@@ -77,12 +79,12 @@
 			var password = document.myform.password.value;
 			
 			if (email == null || email == "") {
-				alert("Email can't be blank");
+				alert("SLIIT Email can't be blank");
 				email.focus;
 				return false;
 			} 
 			if (password.length < 6) {
-				alert("Password must be at least 6 characters long.");
+				alert("Password must be at least 6 characters long & a mix of letters (upper and lower case), numbers, and symbols");
 				password.focus;
 				return false;
 			} 
@@ -91,7 +93,7 @@
 			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 			
 			if (!filter.test(email.value)) {
-				alert('Please provide a valid email address');
+				alert('Please provide a valid SLIIT Email address');
 				email.focus;
 				return false;
 			}

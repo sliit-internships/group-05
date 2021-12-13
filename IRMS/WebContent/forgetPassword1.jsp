@@ -49,7 +49,7 @@ select, option {
 			</div>
 			<h1 class="form-title">Please Fill this Form</h1>
 
-			<form name="form" action="forgetPasswordAction" method="post">
+			<form action="forgetPasswordProcess.jsp" method="post">
 
 				<div class="form-group" >
 					<label for="email">SLIIT Student Email</label> <input type="text"
@@ -58,64 +58,19 @@ select, option {
 						class="check-icon"></span>
 				</div>
 
-				<div class="form-group mb-1" style="margin-top:-5px;">
-				<label for="security question" style="display: flex; justify-content: right; align-items: right;">Security Question</label>
-					<select class="w-100" name="securityQuestion">
-						<option class="w-100" value="What was your first car ?">What
-							was your first car ?</option>
-						<option class="w-100"
-							value="What was the name of your first pet ?">What was
-							the name of your first pet ?</option>
-						<option class="w-100" value="What was your first school name ?">What
-							was your first school name ?</option>
-						<option class="w-100" value="What was your mothers birthday ?">What
-							was your mothers birthday ?</option>
-					</select> <span class="check-icon"></span>
-				</div>
-				<div class="form-group mb-1" style="margin-top:-5px;">
-					<label for="answer" >Your Answer</label> <input type="text"
-						name="answer" id="answer" class="w-100"
-						placeholder="answer" required> <span class="check-icon"></span>
-				</div>
-				<div class="form-group mb-1" style="margin-top:35px;">
-					<label for="new password">Enter Your New Password</label> <input type="password"
-						name="newPassword" id="id_password" class="w-100"
-						placeholder="enter password" required><i class="far fa-eye" id="togglePassword" style=" margin-left: -20px; cursor: pointer;"></i> <span class="check-icon"></span>
-				</div>
-				<div class="form-group mb-1" style="margin-top:35px;">
-					<label for="reenter password">Re-enter Your New Password</label> <input type="password"
-						name="newPassword1" id="id_password1" class="w-100"
-						placeholder="Re-enter password" required><i class="far fa-eye" id="togglePassword1" style=" margin-left: -20px; cursor: pointer;"></i> <span class="check-icon"></span>
-				</div>
-
-
 				<div class="form-group text-left mb-2" style="margin-top: -10px">
 				</div>
 
 				<div class="form-group mb-0">
-					<input type="submit" value="Save" class="w-100" id="submit"
-						onClick="return checkEquel()" onClick="validateform()">
+					<input type="submit" value="Send" class="w-100">
 				</div>
 			</form>
 			<small>You Want to Login Please <a href="systemLogin.jsp">Click here</a></small>
-			<%
-			String msg = request.getParameter("msg");
-			if("done".equals(msg))
-			{
-			%>
-			<h3 style="color:#0000cc;">Password Change Successfully...!</h3>
-			<%} %>
-			<%
-			if("invalid".equals(msg))
-			{
-			%>
-			<h3 style="color:#ff3300;">Something went wrong...!<br> Try again...!</h3>
-			<%} %>
 		</div>
 		<!-- end form-wrapper -->
 	</div>
 	<!-- end wrapper -->
-
+<!-- 
  <script>
 		function checkEquel() {
 			var p = document.form.newPassword.value;
@@ -188,6 +143,6 @@ select, option {
 		});
 	   
 	  </script>
-
+ -->
 </body>
 </html>
