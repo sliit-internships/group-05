@@ -3,39 +3,36 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%
-String id = request.getParameter("id");
+
 String driver = "com.mysql.jdbc.Driver";
-String connectionUrl = "jdbc:mysql://localhost:3306/";
-String database = "admindb";
+String connectionUrl = "jdbc:mysql://localhost:3306/admindb";
 String userid = "root";
 String password = "11111";
-try {
-	Class.forName(driver);
-} catch (ClassNotFoundException e) {
-	e.printStackTrace();
-}
-Connection connection = null;
-Statement statement = null;
+Statement stmt = null;
+Connection con = null;
 ResultSet resultSet = null;
-%>
-<%
-try {
-	connection = DriverManager.getConnection(connectionUrl + database, userid, password);
-	statement = connection.createStatement();
-	String sql = "select * from student_details where studentId=" + id;
-	resultSet = statement.executeQuery(sql);
-	while (resultSet.next()) {
+PreparedStatement pstatement = null;
+Class.forName("com.mysql.jdbc.Driver").newInstance();
+con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
 %>
 <!DOCTYPE html>
 <html>
 <body>
 	<h1>Update data from database</h1>
 
-	<form method="post" action="studentUpdateProcess.jsp">
-		<input type="hidden" name="studentId"
-			value="<%=resultSet.getString("studentId")%>">
+	<form method="post" action="">
+		<%
+	stmt = con.createStatement();
+	String u = request.getParameter("u");
+	int num = Integer.parseInt(u);
+	String data = "select * from student_details where id='"+num+"'";
+	resultSet = stmt.executeQuery(data);
+	while(resultSet.next()){
+	%>
+		<input type="hidden" name="id" value="<%=resultSet.getString("id")%>" />
 		<div class="col-8">
 			<div class="input-group">
 				<label for="email" style="font-size: 1.1rem;">SLIIT Student
@@ -90,7 +87,7 @@ try {
 				<label for="email" style="font-size: 1.1rem;">Mobile Number</label><input
 					class="input--style-2" type="text" placeholder="Mobile Number"
 					name="stuMobileNumber"
-					value="<%=resultSet.getString("stuMobileNumber")%>">
+					value="<%=resultSet.getLong("stuMobileNumber")%>">
 			</div>
 		</div>
 
@@ -152,13 +149,37 @@ try {
 			<input type="submit" class="btn btn--radius btn--green" value="Add">
 		</div>
 	</form>
+	</body>
+</html>
 	<%
+	String studentId = request.getParameter("studentId");
+	String studentName = request.getParameter("studentName");
+	String specialization = request.getParameter("specialization");
+	String studentEmail = request.getParameter("studentEmail");
+	String supervisorEmail = request.getParameter("supervisorEmail");
+	long stuMobileNumber = Long.parseLong(request.getParameter("stuMobileNumber"));
+	String internshipStartDate = request.getParameter("internshipStartDate");
+	String currentYear = request.getParameter("currentYear");
+	String plantoComplete2ndYear = request.getParameter("plantoComplete2ndYear");
+	String periodComplete2year = request.getParameter("periodComplete2year");
+	if(studentId!=null && studentName!=null && specialization!=null && studentEmail!=null && supervisorEmail!=null && internshipStartDate!=null && currentYear!=null && plantoComplete2ndYear!=null && periodComplete2year!=null){
+		String query = "Update student_details set studentId=?,studentName=?,specialization=?,studentEmail=?,supervisorEmail=?,stuMobileNumber=?,internshipStartDate=?,currentYear=?,plantoComplete2ndYear=?,periodComplete2year=? where id= '"+studentId+"'";
+		pstatement = con.prepareStatement(query);
+		pstatement.setString(1, studentId);
+		pstatement.setString(2, studentName);
+		pstatement.setString(3, studentEmail);
+		pstatement.setString(4, specialization);
+		pstatement.setString(5, supervisorEmail);
+		pstatement.setLong(6, stuMobileNumber);
+		pstatement.setString(7, internshipStartDate);
+		pstatement.setString(8, currentYear);
+		pstatement.setString(9, plantoComplete2ndYear);
+		pstatement.setString(10, periodComplete2year);
+		pstatement.executeUpdate();
+		response.sendRedirect("studentDetails.jsp");
+
+	
 	}
-	connection.close();
-	} catch (Exception e) {
-	e.printStackTrace();
 	}
 	%>
 
-</body>
-</html>

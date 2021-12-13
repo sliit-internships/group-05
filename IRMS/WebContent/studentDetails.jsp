@@ -1,3 +1,5 @@
+<%@ page import="java.sql.*" %>
+<%@ page import="java.io.*" %>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -10,9 +12,9 @@ String database = "admindb";
 String userid = "root";
 String password = "11111";
 try {
-Class.forName(driver);
+	Class.forName(driver);
 } catch (ClassNotFoundException e) {
-e.printStackTrace();
+	e.printStackTrace();
 }
 Connection connection = null;
 Statement statement = null;
@@ -74,8 +76,8 @@ ResultSet resultSet = null;
 			<div class="header-mobile__bar">
 				<div class="container-fluid">
 					<div class="header-mobile-inner">
-						<a class="logo" href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT
-								IRMS </span>
+						<a class="logo" href="adminHome.jsp" style="font-size: 35px;">
+							<span>SLIIT IRMS </span>
 						</a>
 						<button class="hamburger hamburger--slider" type="button">
 							<span class="hamburger-box"> <span class="hamburger-inner"></span>
@@ -113,7 +115,8 @@ ResultSet resultSet = null;
 		<!-- MENU SIDEBAR-->
 		<aside class="menu-sidebar d-none d-lg-block">
 			<div class="logo">
-				<a href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT IRMS </span>
+				<a href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT
+						IRMS </span>
 				</a>
 			</div>
 			<div class="menu-sidebar__content js-scrollbar1">
@@ -149,7 +152,8 @@ ResultSet resultSet = null;
 			<header class="header-desktop">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<div class="header-wrap" style="display: flex; justify-content: right; align-items: right;">
+						<div class="header-wrap"
+							style="display: flex; justify-content: right; align-items: right;">
 							<!-- <form class="form-header" action="" method="POST">
 								<input class="au-input au-input--xl" type="text" name="search"
 									placeholder="Search for datas &amp; reports..." />
@@ -330,15 +334,16 @@ ResultSet resultSet = null;
 						<div class="row">
 							<div class="col-lg-9">
 								<h2 class="title-1 m-b-25">Summary</h2>
-								<form class="form-header" action="searchStudentProcess.jsp" method="post"
+								<form class="form-header" action="" method="get"
 									style="margin-bottom: 25px;">
-									<input class="au-input au-input--xl" type="text" name="search"
-										placeholder="Use Student ID to Search" />
+									<input class="au-input au-input--xl" type="text" name="search1"
+										placeholder="Use Student ID or Email..." />
 									<button class="au-btn--submit" type="submit">
 										<i class="zmdi zmdi-search"></i>
 									</button>
-									<a href="addStudent.jsp" style="margin-left:600px" class="au-btn--submit" type="submit" >
-										<i class="zmdi zmdi-plus"></i>
+									<a href="addStudent.jsp" style="margin-left: 600px"
+										class="au-btn--submit" type="submit"> <i
+										class="zmdi zmdi-plus"></i>
 									</a>
 								</form>
 								<div class="table-responsive table--no-card m-b-40">
@@ -357,13 +362,30 @@ ResultSet resultSet = null;
 												<th class="text-right">Plan to Complete 2nd Year</th>
 												<th class="text-right">Period of Complete 2nd Year</th>
 												<th class="text-right">Update</th>
+												<th class="text-right">Delete</th>
 											</tr>
 											<%
 											try {
 												Class.forName("com.mysql.jdbc.Driver");
 												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
-												Statement stmt = con.createStatement();
-												ResultSet rs = stmt.executeQuery("select * from admindb.student_details");
+												Statement stmt = null;
+												ResultSet rs = null;
+												stmt = con.createStatement();
+												String query = request.getParameter("search1");
+												String data;
+
+												if (query != null) {
+													data = "select * from student_details where studentId like '%" + query + "%' or studentName like '%" + query
+													+ "%' or specialization like '%" + query + "%' or studentEmail like '%" + query
+													+ "%' or supervisorEmail like '%" + query + "%' or stuMobileNumber like '%" + query
+													+ "%'or stuMobileNumber like '%" + query + "%'or stuMobileNumber like '%" + query
+													+ "%'or stuMobileNumber like '%" + query + "%'or stuMobileNumber like '%" + query + "%'";
+
+												} else {
+													data = "select * from student_details order by studentId desc";
+												}
+
+												rs = stmt.executeQuery(data);
 												while (rs.next()) {
 											%>
 											<tr>
@@ -372,12 +394,13 @@ ResultSet resultSet = null;
 												<td><%=rs.getString("specialization")%></td>
 												<td><%=rs.getString("studentEmail")%></td>
 												<td><%=rs.getString("supervisorEmail")%></td>
-												<td><%=rs.getString("stuMobileNumber")%></td>
+												<td><%=rs.getLong("stuMobileNumber")%></td>
 												<td><%=rs.getString("internshipStartDate")%></td>
 												<td><%=rs.getString("currentYear")%></td>
 												<td><%=rs.getString("plantoComplete2ndYear")%></td>
 												<td><%=rs.getString("periodComplete2year")%></td>
-												<%-- <td><a href="updateStudent.jsp?id=<%=resultSet.getString("studentId")%>">update</a></td> --%>
+												<td><a href="updateStudent.jsp?u=<%=rs.getString("studentId")%>">update</a></td>
+												<td><a href="deleteStudent.jsp?id=<%=rs.getString("studentId")%>">Delete</a></td>
 
 											</tr>
 											<%
@@ -388,9 +411,9 @@ ResultSet resultSet = null;
 											}
 											%>
 										</thead>
-										
-										
-										
+
+
+
 										<!-- <tbody>
 											<tr>
 												<td>9/22/2021</td>
