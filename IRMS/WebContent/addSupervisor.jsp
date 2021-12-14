@@ -10,26 +10,7 @@
 <meta name="description" content="au theme template">
 <meta name="author" content="Hau Nguyen">
 <meta name="keywords" content="au theme template">
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
-<%
-String id = request.getParameter("id");
-String driver = "com.mysql.jdbc.Driver";
-String connectionUrl = "jdbc:mysql://localhost:3306/";
-String database = "admindb";
-String userid = "root";
-String password = "11111";
-try {
-	Class.forName(driver);
-} catch (ClassNotFoundException e) {
-	e.printStackTrace();
-}
-Connection connection = null;
-Statement statement = null;
-ResultSet resultSet = null;
-%>
+
 
 <!-- Title Page-->
 <title>Student Dashboard</title>
@@ -62,7 +43,26 @@ ResultSet resultSet = null;
 	rel="stylesheet" media="all">
 
 <!-- Main CSS-->
-<link href="./css/themeSuper.css" rel="stylesheet" media="all">
+<link href="./css/themeStudent.css" rel="stylesheet" media="all">
+
+
+<!-- Icons font CSS-->
+<link href="vendor/mdi-font/css/material-design-iconic-font.min.css"
+	rel="stylesheet" media="all">
+<link href="vendor/font-awesome-4.7/css/font-awesome.min.css"
+	rel="stylesheet" media="all">
+<!-- Font special for pages-->
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
+	rel="stylesheet">
+
+<!-- Vendor CSS-->
+<link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="vendor/datepicker/daterangepicker.css" rel="stylesheet"
+	media="all">
+
+<!-- Main CSS-->
+<link href="css/AddStudent.css" rel="stylesheet" media="all">
 
 </head>
 
@@ -73,8 +73,8 @@ ResultSet resultSet = null;
 			<div class="header-mobile__bar">
 				<div class="container-fluid">
 					<div class="header-mobile-inner">
-						<a class="logo" href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT
-								IRMS </span>
+						<a class="logo" href="adminHome.jsp" style="font-size: 35px;">
+							<span>SLIIT IRMS </span>
 						</a>
 						<button class="hamburger hamburger--slider" type="button">
 							<span class="hamburger-box"> <span class="hamburger-inner"></span>
@@ -89,12 +89,11 @@ ResultSet resultSet = null;
 						<li><a href="adminHome.jsp"> <i
 								class="fas fa-tachometer-alt"></i>Dashboard
 						</a></li>
-						<li><a href="studentDetails.jsp"> <i
+						<li><a class="js-arrow" href="studentDetails.jsp"> <i
 								class="fas fa-chart-bar"></i>Student Details
 						</a></li>
-						<li class="active has-sub"><a class="js-arrow"
-							href="superDetails.jsp"> <i class="fas fa-table"></i>Supervisor
-								Details
+						<li class="active has-sub"><a href="superDetails.jsp"> <i
+								class="fas fa-table"></i>Supervisor Details
 						</a></li>
 						<li><a href="#"> <i class="far fa-check-square"></i>Forms
 								Details
@@ -102,6 +101,7 @@ ResultSet resultSet = null;
 						<li><a href="adminCalander.jsp"> <i
 								class="fas fa-calendar-alt"></i>Calendar
 						</a></li>
+
 					</ul>
 				</div>
 			</nav>
@@ -111,7 +111,8 @@ ResultSet resultSet = null;
 		<!-- MENU SIDEBAR-->
 		<aside class="menu-sidebar d-none d-lg-block">
 			<div class="logo">
-				<a href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT IRMS </span>
+				<a href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT
+						IRMS </span>
 				</a>
 			</div>
 			<div class="menu-sidebar__content js-scrollbar1">
@@ -120,12 +121,11 @@ ResultSet resultSet = null;
 						<li><a href="adminHome.jsp"> <i
 								class="fas fa-tachometer-alt"></i>Dashboard
 						</a></li>
-						<li><a href="studentDetails.jsp"> <i
+						<li><a class="js-arrow" href="studentDetails.jsp"> <i
 								class="fas fa-chart-bar"></i>Student Details
 						</a></li>
-						<li class="active has-sub"><a class="js-arrow"
-							href="superDetails.jsp"> <i class="fas fa-table"></i>Supervisor
-								Details
+						<li class="active has-sub"><a href="superDetails.jsp"> <i
+								class="fas fa-table"></i>Supervisor Details
 						</a></li>
 						<li><a href="#"> <i class="far fa-check-square"></i>Forms
 								Details
@@ -133,6 +133,8 @@ ResultSet resultSet = null;
 						<li><a href="adminCalander.jsp"> <i
 								class="fas fa-calendar-alt"></i>Calendar
 						</a></li>
+
+
 					</ul>
 				</nav>
 			</div>
@@ -314,120 +316,157 @@ ResultSet resultSet = null;
 			<div class="main-content">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<!-- <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">overview</h2>
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
-                                </div>
-                            </div>
-                        </div> -->
+						<div class="page-wrapper font-robo">
+							<div class="card card-2">
+								<div class="card-heading">
+									<a href="superDetails.jsp"
+										style="margin-left: 50px; color: #fff; font-weight: 400; font-size: 15px; border: solid; padding: 10px 10px; border-radius: 5px;"
+										type="submit"> Go Back </a>
+								</div>
+								<div class="card-body">
+									<h2 class="title">Registration Info</h2>
+									<form name="superform1" method="post"
+										action="addSuperProcess.jsp">
 
-						<div class="row">
-							<div class="col-lg-9">
-								<h2 class="title-1 m-b-25">Summary</h2>
-								<form class="form-header" action="" method="get"
-									style="margin-bottom: 25px;">
-									<input class="au-input au-input--xl" type="text" name="search1"
-										placeholder="Use Student ID or Email..." />
-									<button class="au-btn--submit" type="submit">
-										<i class="zmdi zmdi-search"></i>
-									</button>
-									<a href="addSupervisor.jsp" style="margin-left: 600px"
-										class="au-btn--submit" type="submit"> <i
-										class="zmdi zmdi-plus"></i>
-									</a>
-								</form>
-								<div class="table-responsive table--no-card m-b-40">
-									<table
-										class="table table-borderless table-striped table-earning">
-										<thead>
-											<tr>
-												<th class="text-right">Supervisor Name</th>
-												<th class="text-right">Title</th>
-												<th class="text-right">Email Address</th>
-												<th class="text-right">Contact No</th>
-												<th class="text-right">Supervisor Company</th>
-												<th class="text-right">Company Address</th>
-											</tr>
-											</thead>
-											<tbody>
-											<%
-											try {
-												Class.forName("com.mysql.jdbc.Driver");
-												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
-												Statement stmt = con.createStatement();
-												ResultSet rs = stmt.executeQuery("select * from admindb.super_details");
-												while (rs.next()) {
-											%>
-											<tr>
-												
-												<td><%=rs.getString("super_name")%></td>
-												<td><%=rs.getString("super_title")%></td>
-												<td><%=rs.getString("super_email")%></td>
-												<td><%=rs.getString("super_mobile")%></td>
-												<td><%=rs.getString("super_company")%></td>
-												<td><%=rs.getString("super_company_address")%></td>
-
-											</tr>
-											<%
-											}
-
-											} catch (Exception e) {
-											e.printStackTrace();
-											}
-											%>
-										</tbody>
-									</table>
+										<div class="col-8">
+											<div class="input-group">
+												<label for="email" style="font-size: 1.1rem;">
+													Supervisor Name</label><input class="input--style-2" type="text"
+													placeholder="Enter Name" name="superName">
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="input-group">
+												<div class="rs-select2 js-select-simple select--no-search">
+													<label for="email" style="font-size: 1.1rem;">Title</label><select
+														name="title">
+														<option disabled="disabled" selected="selected">-- Select --</option>
+														<option value="IT manager">IT Manager</option>
+														<option value="IT director">IT Director</option>
+														<option value="Cloud security specialist">Cloud
+															Security Specialist</option>
+														<option value="Software engineer">Software
+															Engineer</option>
+														<option value="IT coordinator">IT Coordinator</option>
+														<option value="Database administrator">Database
+															administrator</option>
+														<option value="Data analyst">Data Analyst</option>
+														<option value="Back-end developer">Back-end
+															developer</option>
+														<option value="Full-stack developer">Full-stack
+															developer</option>
+														<option value="Web developer">Web Developer</option>
+														<option value="UI UX designer">UI UX Designer</option>
+														<option value="IT security engineer">IT Security
+															engineer</option>
+														<option value="Project manager">Project Manager</option>
+													</select>
+													<div class="select-dropdown"></div>
+												</div>
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="input-group">
+												<label for="email" style="font-size: 1.1rem;">Supervisor
+													E-Mail</label><input class="input--style-2" type="text"
+													placeholder="Enter E-Mail" name="superEmail">
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="input-group">
+												<label for="email" style="font-size: 1.1rem;">Supervisor
+													Mobile Number</label><input class="input--style-2" type="text"
+													placeholder="Enter Mobile" name="superMobileNumber">
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="input-group">
+												<div class="rs-select2 js-select-simple select--no-search">
+													<label for="email" style="font-size: 1.1rem;">Supervisor Company</label><select name="superCompany">
+														<option disabled="disabled" selected="selected">-- Select --</option>
+														<option value="Company 1">Company 1</option>
+														<option value="Company 2">Company 2</option>
+														<option value="Company 3">Company 3</option>
+														<option value="Company 4">Company 4</option>
+														<option value="Company 5">Company 5</option>
+														<option value="Company 6">Company 6</option>
+														<option value="Company 7">Company 7</option>
+														<option value="Company 8">Company 8</option>
+														<option value="Company 9">Company 9</option>
+														<option value="Company 10">Company 10</option>
+													</select>
+													<div class="select-dropdown"></div>
+												</div>
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="input-group">
+												<label for="email" style="font-size: 1.1rem;">Company Address</label><input class="input--style-2" type="text"
+													placeholder="Enter Address" name="superComAddress">
+											</div>
+										</div>
+										<div class="p-t-30">
+											<input type="submit" class="btn btn--radius btn--green"
+												value="Add">
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="copyright">
-									<p>Copyright© 2021. All rights reserved.</p>
-								</div>
-							</div>
-						</div>
-
 					</div>
 				</div>
 			</div>
-			<!-- END MAIN CONTENT-->
-			<!-- END PAGE CONTAINER-->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="copyright">
+						<p>Copyright© 2021. All rights reserved.</p>
+					</div>
+				</div>
+			</div>
+
 		</div>
+		<!-- END MAIN CONTENT-->
+		<!-- END PAGE CONTAINER-->
 
-	</div>
 
-	<!-- Jquery JS-->
-	<script src="vendor/jquery-3.2.1.min.js"></script>
-	<!-- Bootstrap JS-->
-	<script src="vendor/bootstrap-4.1/popper.min.js"></script>
-	<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-	<!-- Vendor JS       -->
-	<script src="vendor/slick/slick.min.js">
-		
-	</script>
-	<script src="vendor/wow/wow.min.js"></script>
-	<script src="vendor/animsition/animsition.min.js"></script>
-	<script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-		
-	</script>
-	<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-	<script src="vendor/counter-up/jquery.counterup.min.js">
-		
-	</script>
-	<script src="vendor/circle-progress/circle-progress.min.js"></script>
-	<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-	<script src="vendor/chartjs/Chart.bundle.min.js"></script>
-	<script src="vendor/select2/select2.min.js">
-		
-	</script>
+		<!-- Jquery JS-->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<!-- Vendor JS-->
+		<script src="vendor/select2/select2.min.js"></script>
+		<script src="vendor/datepicker/moment.min.js"></script>
+		<script src="vendor/datepicker/daterangepicker.js"></script>
 
-	<!-- Main JS-->
-	<script src="js/main.js"></script>
+		<!-- Main JS-->
+		<script src="js/global.js"></script>
 
+		<!-- Jquery JS-->
+		<script src="vendor/jquery-3.2.1.min.js"></script>
+		<!-- Bootstrap JS-->
+		<script src="vendor/bootstrap-4.1/popper.min.js"></script>
+		<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+		<!-- Vendor JS       -->
+		<script src="vendor/slick/slick.min.js">
+			
+		</script>
+		<script src="vendor/wow/wow.min.js"></script>
+		<script src="vendor/animsition/animsition.min.js"></script>
+		<script
+			src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+			
+		</script>
+		<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+		<script src="vendor/counter-up/jquery.counterup.min.js">
+			
+		</script>
+		<script src="vendor/circle-progress/circle-progress.min.js"></script>
+		<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+		<script src="vendor/chartjs/Chart.bundle.min.js"></script>
+		<script src="vendor/select2/select2.min.js">
+			
+		</script>
+
+		<!-- Main JS-->
+		<script src="js/main.js"></script>
 </body>
 
 </html>

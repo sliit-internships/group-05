@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class LoginServlet extends HttpServlet {
 	/**
@@ -38,6 +39,8 @@ public class LoginServlet extends HttpServlet {
 			
 			if(rs.next()) {
 				/* out.println("Login Successfully ...!"); */
+				HttpSession session = req.getSession();
+				session.setAttribute("email", email);
 				RequestDispatcher dispatcher = req.getRequestDispatcher("adminHome.jsp");
 		    	dispatcher.forward(req, res);
 			}else {

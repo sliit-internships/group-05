@@ -1,5 +1,5 @@
-<%@ page import="java.sql.*" %>
-<%@ page import="java.io.*" %>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.io.*"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -351,7 +351,7 @@ ResultSet resultSet = null;
 										class="table table-borderless table-striped table-earning">
 										<thead>
 											<tr>
-												<th class="text-right">Student ID</th>
+												<th class="text-right" >Student ID</th>
 												<th class="text-right">Full Name</th>
 												<th class="text-right">Specialization</th>
 												<th class="text-right">Student E-Mail</th>
@@ -364,6 +364,8 @@ ResultSet resultSet = null;
 												<th class="text-right">Update</th>
 												<th class="text-right">Delete</th>
 											</tr>
+											</thead>
+											<tbody>
 											<%
 											try {
 												Class.forName("com.mysql.jdbc.Driver");
@@ -382,7 +384,7 @@ ResultSet resultSet = null;
 													+ "%'or stuMobileNumber like '%" + query + "%'or stuMobileNumber like '%" + query + "%'";
 
 												} else {
-													data = "select * from student_details order by studentId desc";
+													data = "select * from student_details order by s_id asc";
 												}
 
 												rs = stmt.executeQuery(data);
@@ -394,13 +396,15 @@ ResultSet resultSet = null;
 												<td><%=rs.getString("specialization")%></td>
 												<td><%=rs.getString("studentEmail")%></td>
 												<td><%=rs.getString("supervisorEmail")%></td>
-												<td><%=rs.getLong("stuMobileNumber")%></td>
+												<td><%=rs.getString("stuMobileNumber")%></td>
 												<td><%=rs.getString("internshipStartDate")%></td>
 												<td><%=rs.getString("currentYear")%></td>
 												<td><%=rs.getString("plantoComplete2ndYear")%></td>
 												<td><%=rs.getString("periodComplete2year")%></td>
-												<td><a href="updateStudent.jsp?u=<%=rs.getString("studentId")%>">update</a></td>
-												<td><a href="deleteStudent.jsp?id=<%=rs.getString("studentId")%>">Delete</a></td>
+												<td><a
+													href="updateStudent.jsp?id=<%=rs.getString("s_id")%>">update</a></td>
+												<td><a
+													href="deleteStudent.jsp?id=<%=rs.getString("s_id")%>">Delete</a></td>
 
 											</tr>
 											<%
@@ -410,108 +414,7 @@ ResultSet resultSet = null;
 											e.printStackTrace();
 											}
 											%>
-										</thead>
-
-
-
-										<!-- <tbody>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-										</tbody> -->
+										</tbody>
 									</table>
 								</div>
 							</div>

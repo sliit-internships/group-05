@@ -25,13 +25,13 @@
 		String specialization = request.getParameter("specialization");
 		String studentEmail = request.getParameter("studentEmail");
 		String supervisorEmail = request.getParameter("supervisorEmail");
-		long stuMobileNumber = Long.parseLong(request.getParameter("stuMobileNumber"));
+		String stuMobileNumber = request.getParameter("stuMobileNumber");
 		String internshipStartDate = request.getParameter("internshipStartDate");
 		String currentYear = request.getParameter("currentYear");
 		String plantoComplete2ndYear = request.getParameter("plantoComplete2ndYear");
 		String periodComplete2year = request.getParameter("periodComplete2year");
 
-		String query = "insert into student_details values('" + studentId + "', '" + studentName + "', '" + specialization
+		String query = "insert into student_details values(null,'" + studentId + "', '" + studentName + "', '" + specialization
 		+ "', '" + studentEmail + "', '" + supervisorEmail + "', '" + stuMobileNumber + "', '" + internshipStartDate
 		+ "', '" + currentYear + "','" + plantoComplete2ndYear + "', '" + periodComplete2year + "')";
 		stmt.executeUpdate(query);

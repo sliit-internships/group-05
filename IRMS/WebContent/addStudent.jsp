@@ -349,7 +349,8 @@
 												<div class="rs-select2 js-select-simple select--no-search">
 													<label for="email" style="font-size: 1.1rem;">Specialization</label><select
 														name="specialization">
-														<option disabled="disabled" selected="selected">Specialization</option>
+														<option disabled="disabled" selected="selected">--
+															Select --</option>
 														<option value="IT">IT</option>
 														<option value="SE">SE</option>
 														<option value="CSNE">CSNE</option>
@@ -398,8 +399,8 @@
 												<div class="rs-select2 js-select-simple select--no-search">
 													<label for="email" style="font-size: 1.1rem;">Current
 														Year of Registration</label><select name="currentYear">
-														<option disabled="disabled" selected="selected">Current
-															Year of Registration</option>
+														<option disabled="disabled" selected="selected">--
+															Select --</option>
 														<option value="Year 1">Year 1</option>
 														<option value="Year 2">Year 2</option>
 														<option value="Year 3">Year 3</option>
@@ -424,10 +425,10 @@
 										<div class="col-8">
 											<div class="input-group">
 												<div class="rs-select2 js-select-simple select--no-search">
-													<label for="email" style="font-size: 1.1rem;">SLIIT
-														Student Email</label><select name="periodComplete2year">
-														<option disabled="disabled" selected="selected">Period
-															of Complete 2nd Year</option>
+													<label for="email" style="font-size: 1.1rem;">Period
+														of Complete 2nd Year</label><select name="periodComplete2year">
+														<option disabled="disabled" selected="selected">--
+															Select --</option>
 														<option value="January - June">January - June</option>
 														<option value="June - November">June - November</option>
 													</select>
