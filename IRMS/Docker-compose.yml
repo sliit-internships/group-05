@@ -1,0 +1,38 @@
+version: '3.3'
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - intern_vol:/var/lib/mysql
+
+     environment:
+       MYSQL_ROOT_PASSWORD: 11111
+       MYSQL_DATABASE: admin
+       MYSQL_USER: root
+       MYSQL_PASSWORD: 11111
+     ports:
+       - 3306:3306
+phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8081:80'
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: 11111
+web:
+    depends_on:
+      - db
+    image: tomcat
+    volumes:
+      - ./target/IRMS_it18362886.war:/usr/local/tomcat/webapps/IRMS_it18362886.war
+    ports:
+      - '8082:8080'
+    environment:
+      MYSQL_ROOT_PASSWORD: 11111
+      MYSQL_DATABASE: admin
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 11111
+volumes:
+    intern_vol:
