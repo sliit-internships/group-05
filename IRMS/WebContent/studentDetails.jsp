@@ -1,6 +1,30 @@
+<%@ page import="java.sql.*"%>
+<%@ page import="java.io.*"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%
+String id = request.getParameter("id");
+String driver = "com.mysql.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "admindb";
+String userid = "root";
+String password = "11111";
+try {
+	Class.forName(driver);
+} catch (ClassNotFoundException e) {
+	e.printStackTrace();
+}
+Connection connection = null;
+Statement statement = null;
+ResultSet resultSet = null;
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
 <head>
 <!-- Required meta tags-->
 <meta charset="UTF-8">
@@ -52,8 +76,8 @@
 			<div class="header-mobile__bar">
 				<div class="container-fluid">
 					<div class="header-mobile-inner">
-						<a class="logo" href="#" style="font-size: 35px;"> <span>SLIIT
-								IRMS </span>
+						<a class="logo" href="adminHome.jsp" style="font-size: 35px;">
+							<span>SLIIT IRMS </span>
 						</a>
 						<button class="hamburger hamburger--slider" type="button">
 							<span class="hamburger-box"> <span class="hamburger-inner"></span>
@@ -75,6 +99,10 @@
 						<li><a href="superDetails.jsp"> <i class="fas fa-table"></i>Supervisor
 								Details
 						</a></li>
+						 <li class=""><a class="js-arrow"
+							href="companyDetails.jsp"> <i class="fas fa-table"></i>Company
+								Details
+						</a></li>
 						<li><a href="#"> <i class="far fa-check-square"></i>Forms
 								Details
 						</a></li>
@@ -91,7 +119,8 @@
 		<!-- MENU SIDEBAR-->
 		<aside class="menu-sidebar d-none d-lg-block">
 			<div class="logo">
-				<a href="#" style="font-size: 35px;"> <span>SLIIT IRMS </span>
+				<a href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT
+						IRMS </span>
 				</a>
 			</div>
 			<div class="menu-sidebar__content js-scrollbar1">
@@ -107,7 +136,11 @@
 						<li><a href="superDetails.jsp"> <i class="fas fa-table"></i>Supervisor
 								Details
 						</a></li>
-						<li><a href="#"> <i class="far fa-check-square"></i>Forms
+						 <li class=""><a class="js-arrow"
+							href="companyDetails.jsp"> <i class="fas fa-table"></i>Company
+								Details
+						</a></li>
+						<li><a href="formDetails.jsp"> <i class="far fa-check-square"></i>Forms
 								Details
 						</a></li>
 						<li><a href="adminCalander.jsp"> <i
@@ -129,11 +162,11 @@
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search"
+								<!-- <input class="au-input au-input--xl" type="text" name="search"
 									placeholder="Search for datas &amp; reports..." />
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
-								</button>
+								</button> -->
 							</form>
 							<div class="header-button">
 								<div class="noti-wrap">
@@ -248,23 +281,30 @@
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<img src="images/icon/saman.jpg" alt="saman" />
+											<img src="images/icon/avatar-08.jpg" alt="saman" />
 										</div>
+										<%
+										String email = (String) session.getAttribute("email");
+										%>
 										<div class="content">
-											<a class="js-acc-btn" href="#">Saman Gunawardana</a>
+											<a class="js-acc-btn" href="#"><%
+															out.println(email);
+															%></a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <img src="images/icon/saman.jpg"
-														alt="saman" />
+													<a href="#"> <img src="images/icon/avatar-08.jpg" alt="saman" />
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-														<a href="#">Saman Gunawardana</a>
+														<a href="#">
+															<%
+															out.println(email);
+															%>
+														</a>
 													</h5>
-													<span class="email">saman.g@sliit.lk</span>
 												</div>
 											</div>
 											<div class="account-dropdown__body">
@@ -278,7 +318,7 @@
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
-												<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+												<a href="adminLogout.jsp"> <i class="zmdi zmdi-power"></i>Logout
 												</a>
 											</div>
 										</div>
@@ -308,120 +348,86 @@
 						<div class="row">
 							<div class="col-lg-9">
 								<h2 class="title-1 m-b-25">Summary</h2>
+								<form class="form-header" action="" method="get"
+									style="margin-bottom: 25px;">
+									<input class="au-input au-input--xl" type="text" name="search1"
+										placeholder="Use Student ID or Email..." />
+									<button class="au-btn--submit" type="submit">
+										<i class="zmdi zmdi-search"></i>
+									</button>
+									<a href="addStudent.jsp" style="margin-left: 20px"
+										class="au-btn--submit" type="submit"> <i
+										class="zmdi zmdi-plus"></i>
+									</a>
+								</form>
 								<div class="table-responsive table--no-card m-b-40">
 									<table
 										class="table table-borderless table-striped table-earning">
 										<thead>
 											<tr>
-												<th>Student ID</th>
-												<th>Full Name</th>
-												<th>Specialization</th>
-												<th>Student E-Mail</th>
-												<th>Supervisor E-Mail</th>
+												<th class="text-right">Student ID</th>
+												<th class="text-right">Full Name</th>
+												<th class="text-right">Student E-Mail</th>
 												<th class="text-right">Mobile Numbers</th>
-												<th class="text-right">Internship Start Date</th>
 												<th class="text-right">Current Year of Registration</th>
-												<th class="text-right">Plan to Complete 2nd Year</th>
 												<th class="text-right">Period of Complete 2nd Year</th>
+												<th class="text-right">Specialization</th>
+												<th class="text-right">Found Internship</th>
+												<th class="text-right">Supervisor E-Mail</th>
+												<th class="text-right">Approval</th>
+												<th class="text-left">Update</th>
+												<th class="text-left">Delete</th>
 											</tr>
-										</thead>
-										<tbody>
+											</thead>
+											<tbody>
+											<%
+											try {
+												Class.forName("com.mysql.jdbc.Driver");
+												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "");
+												Statement stmt = null;
+												ResultSet rs = null;
+												stmt = con.createStatement();
+												String query = request.getParameter("search1");
+												String data;
+
+												if (query != null) {
+													data = "select * from internship_registered_student where id like '%" + query + "%' or name like '%" + query
+													+ "%' or email like '%" + query + "%' or mobile like '%" + query
+													+ "%' or year like '%" + query + "%' or semester like '%" + query
+													+ "%'or specialization like '%" + query + "%'or foundintern like '%" + query
+													+ "%'or supervisoremail like '%" + query + "%'or acceptancetype like '%" + query + "%'";
+
+												} else {
+													data = "select * from internship_registered_student order by id asc";
+												}
+
+												rs = stmt.executeQuery(data);
+												while (rs.next()) {
+											%>
 											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
+												<td><%=rs.getString("id")%></td>
+												<td><%=rs.getString("name")%></td>
+												<td><%=rs.getString("email")%></td>
+												<td><%=rs.getString("mobile")%></td>
+												<td><%=rs.getString("year")%></td>
+												<td><%=rs.getString("semester")%></td>
+												<td><%=rs.getString("specialization")%></td>
+												<td><%=rs.getString("foundintern")%></td>
+												<td><%=rs.getString("supervisoremail")%></td>
+												<td><%=rs.getString("acceptancetype")%></td>
+												<td><a
+													href="updateStudent.jsp?id=<%=rs.getString("email")%>">update</a></td>
+												<td><a
+													href="deleteStudent.jsp?id=<%=rs.getString("email")%>">Delete</a></td>
+
 											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
-											<tr>
-												<td>9/22/2021</td>
-												<td>ST01</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td>Dilshan I.H</td>
-												<td class="text-right">14</td>
-												<td class="text-right">1</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-												<td class="text-right">2.9</td>
-											</tr>
+											<%
+											}
+
+											} catch (Exception e) {
+											e.printStackTrace();
+											}
+											%>
 										</tbody>
 									</table>
 								</div>
@@ -477,6 +483,5 @@
 </html>
 <!-- end document-->
 
-Student ID
 
 

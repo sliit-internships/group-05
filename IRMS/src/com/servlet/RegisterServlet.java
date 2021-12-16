@@ -29,7 +29,7 @@ public class RegisterServlet extends HttpServlet {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "");
 			String query = "insert into new_table(name,email,password) values(?,?,?)";
 			PreparedStatement ps = con.prepareStatement(query);
 
