@@ -84,7 +84,7 @@ con = DriverManager.getConnection(host, "root", "11111");
 						<div class="page-wrapper font-robo">
 							<div class="card card-2">
 								<div class="card-heading">
-									<a href="studentDetails.jsp"
+									<a href="superDetails.jsp"
 										style="margin-left: 50px; color: #fff; font-weight: 400; font-size: 15px; border: solid; padding: 10px 10px; border-radius: 5px;"
 										type="submit"> Go Back </a>
 								</div>
@@ -95,125 +95,94 @@ con = DriverManager.getConnection(host, "root", "11111");
 										stmt = con.createStatement();
 										String id = request.getParameter("id");
 										int num = Integer.parseInt(id);
-										String data = "select * from student_details where s_id='" + num + "'";
+										String data = "select * from super_details where super_id='" + num + "'";
 										rs = stmt.executeQuery(data);
 										while (rs.next()) {
 										%>
 										<input type="hidden" name="id"
-											value='<%=rs.getString("s_id")%>' />
+											value='<%=rs.getString("super_id")%>' />
 										<div class="col-8">
 											<div class="input-group">
-												<label for="email" style="font-size: 1.1rem;">SLIIT
-													Student Identification Number</label><input class="input--style-2"
-													type="text" placeholder="Student ID" name="studentId"
-													value='<%=rs.getString("studentId")%>' required>
-											</div>
-										</div>
-										<div class="col-8">
-											<div class="input-group">
-												<label for="email" style="font-size: 1.1rem;">Student
-													Name</label><input class="input--style-2" type="text"
-													placeholder="Student Name" name="studentName"
-													value='<%=rs.getString("studentName")%>' required>
+												<label for="email" style="font-size: 1.1rem;">Supervisor Name</label><input class="input--style-2"
+													type="text" placeholder="Your Name" name="super_name"
+													value='<%=rs.getString("super_name")%>'>
 											</div>
 										</div>
 										<div class="col-8">
 											<div class="input-group">
 												<div class="rs-select2 js-select-simple select--no-search">
-													<label for="email" style="font-size: 1.1rem;">Specialization</label><select
-														name="specialization" required><%=rs.getString("specialization")%>
-														<option disabled="disabled" selected="selected">Specialization</option>
-														<option value="IT">IT</option>
-														<option value="SE">SE</option>
-														<option value="CSNE">CSNE</option>
-														<option value="ISE">ISE</option>
-														<option value="CS">CS</option>
-														<option value="IM">IM</option>
+													<label for="email" style="font-size: 1.1rem;">Title</label><select
+														name="title" value='<%=rs.getString("super_title")%>'>
+														<option disabled="disabled" selected="selected">--
+															Select --</option>
+														<option value="IT manager">IT Manager</option>
+														<option value="IT director">IT Director</option>
+														<option value="Cloud security specialist">Cloud
+															Security Specialist</option>
+														<option value="Software engineer">Software
+															Engineer</option>
+														<option value="IT coordinator">IT Coordinator</option>
+														<option value="Database administrator">Database
+															administrator</option>
+														<option value="Data analyst">Data Analyst</option>
+														<option value="Back-end developer">Back-end
+															developer</option>
+														<option value="Full-stack developer">Full-stack
+															developer</option>
+														<option value="Web developer">Web Developer</option>
+														<option value="UI UX designer">UI UX Designer</option>
+														<option value="IT security engineer">IT Security
+															engineer</option>
+														<option value="Project manager">Project Manager</option>
 													</select>
 													<div class="select-dropdown"></div>
 												</div>
-											</div>
-										</div>
-										<div class="col-8">
-											<div class="input-group">
-												<label for="email" style="font-size: 1.1rem;">Student
-													E-Mail</label><input class="input--style-2" type="text"
-													placeholder="Student E-Mail" name="studentEmail"
-													value='<%=rs.getString("studentEmail")%>' required>
 											</div>
 										</div>
 										<div class="col-8">
 											<div class="input-group">
 												<label for="email" style="font-size: 1.1rem;">Supervisor
 													E-Mail</label><input class="input--style-2" type="text"
-													placeholder="Supervisor E-Mail" name="supervisorEmail"
-													value='<%=rs.getString("supervisorEmail")%>' required>
+													placeholder="Enter E-Mail" name="superEmail" value='<%=rs.getString("super_email")%>'>
 											</div>
 										</div>
 										<div class="col-8">
 											<div class="input-group">
-												<label for="email" style="font-size: 1.1rem;">Mobile
-													Number</label><input class="input--style-2" type="text"
-													placeholder="Mobile Number" name="stuMobileNumber"
-													value='<%=rs.getString("stuMobileNumber")%>' required>
+												<label for="email" style="font-size: 1.1rem;">Supervisor
+													Mobile Number</label><input class="input--style-2" type="text"
+													placeholder="Enter Mobile" name="superMobileNumber" value='<%=rs.getString("super_mobile")%>'>
 											</div>
 										</div>
-
-										<div class="col-8">
-											<div class="input-group">
-												<label for="email" style="font-size: 1.1rem;">Internship
-													Start Date</label><input class="input--style-2 js-datepicker"
-													type="text" placeholder="Internship Start Date"
-													name="internshipStartDate"
-													value='<%=rs.getString("internshipStartDate")%>'> <i
-													class="zmdi zmdi-calendar-note input-icon js-btn-calendar" required></i>
-											</div>
-										</div>
-
 										<div class="col-8">
 											<div class="input-group">
 												<div class="rs-select2 js-select-simple select--no-search">
-													<label for="email" style="font-size: 1.1rem;">Current
-														Year of Registration</label><select name="currentYear" required><%=rs.getString("currentYear")%>
-														<option disabled="disabled" selected="selected">Current
-															Year of Registration</option>
-														<option value="Year 1">Year 1</option>
-														<option value="Year 2">Year 2</option>
-														<option value="Year 3">Year 3</option>
-														<option value="Year 4">Year 4</option>
+													<label for="email" style="font-size: 1.1rem;">Supervisor
+														Company</label><select name="superCompany" value='<%=rs.getString("super_company")%>'>
+														<option disabled="disabled" selected="selected">--
+															Select --</option>
+														<option value="Company 1">Company 1</option>
+														<option value="Company 2">Company 2</option>
+														<option value="Company 3">Company 3</option>
+														<option value="Company 4">Company 4</option>
+														<option value="Company 5">Company 5</option>
+														<option value="Company 6">Company 6</option>
+														<option value="Company 7">Company 7</option>
+														<option value="Company 8">Company 8</option>
+														<option value="Company 9">Company 9</option>
+														<option value="Company 10">Company 10</option>
 													</select>
 													<div class="select-dropdown"></div>
 												</div>
 											</div>
 										</div>
-
 										<div class="col-8">
 											<div class="input-group">
-												<label for="email" style="font-size: 1.1rem;">Plan
-													to Complete 2nd Year</label><input
-													class="input--style-2 js-datepicker" type="text"
-													placeholder="Plan to Complete 2nd Year"
-													name="plantoComplete2ndYear"
-													value='<%=rs.getString("plantoComplete2ndYear")%>' required>
-												<i
-													class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+												<label for="email" style="font-size: 1.1rem;">Company
+													Address</label><input class="input--style-2" type="text"
+													placeholder="Enter Address" name="superComAddress" value='<%=rs.getString("super_company_address")%>'>
 											</div>
 										</div>
-
-										<div class="col-8">
-											<div class="input-group">
-												<div class="rs-select2 js-select-simple select--no-search">
-													<label for="email" style="font-size: 1.1rem;">SLIIT
-														Student Email</label><select name="periodComplete2year" required><%=rs.getString("periodComplete2year")%>
-														<option disabled="disabled" selected="selected">Period
-															of Complete 2nd Year</option>
-														<option value="January - June">January - June</option>
-														<option value="June - November">June - November</option>
-													</select>
-													<div class="select-dropdown"></div>
-												</div>
-											</div>
-										</div>
+										
 										<%
 										}
 										%>
@@ -223,35 +192,27 @@ con = DriverManager.getConnection(host, "root", "11111");
 										</div>
 										<%
 										String a = request.getParameter("id");
-										String studentId = request.getParameter("studentId");
-										String studentName = request.getParameter("studentName");
-										String specialization = request.getParameter("specialization");
-										String studentEmail = request.getParameter("studentEmail");
-										String supervisorEmail = request.getParameter("supervisorEmail");
-										String stuMobileNumber = request.getParameter("stuMobileNumber");
-										String internshipStartDate = request.getParameter("internshipStartDate");
-										String currentYear = request.getParameter("currentYear");
-										String plantoComplete2ndYear = request.getParameter("plantoComplete2ndYear");
-										String periodComplete2year = request.getParameter("periodComplete2year");
-										if (a != null && studentId != null && studentName != null && specialization != null && studentEmail != null
-												&& supervisorEmail != null && internshipStartDate != null && stuMobileNumber != null && currentYear != null
-												&& plantoComplete2ndYear != null && periodComplete2year != null) {
-											String query = "update student_details set studentId=?,studentName=?,specialization=?,studentEmail=?,supervisorEmail=?,stuMobileNumber=?,internshipStartDate=?,currentYear=?,plantoComplete2ndYear=?,periodComplete2year=? where s_id= '"
+										String super_name = request.getParameter("super_name");
+										String title = request.getParameter("title");
+										String superEmail = request.getParameter("superEmail");
+										String superMobileNumber = request.getParameter("superMobileNumber");
+										String superCompany = request.getParameter("superCompany");
+										String superComAddress = request.getParameter("superComAddress");
+										
+										if (a != null && super_name != null && title != null && superEmail != null && superMobileNumber != null
+												&& superCompany != null && superComAddress != null) {
+											String query = "update super_details set super_name=?,super_title=?,super_email=?,super_mobile=?,super_company=?,super_company_address=? where super_id= '"
 											+ a + "'";
 											pstmt = con.prepareStatement(query);
-											pstmt.setString(1, studentId);
-											pstmt.setString(2, studentName);
-											pstmt.setString(3, specialization);
-											pstmt.setString(4, studentEmail);
-											pstmt.setString(5, supervisorEmail);
-											pstmt.setString(6, stuMobileNumber);
-											pstmt.setString(7, internshipStartDate);
-											pstmt.setString(8, currentYear);
-											pstmt.setString(9, plantoComplete2ndYear);
-											pstmt.setString(10, periodComplete2year);
-
+											pstmt.setString(1, super_name);
+											pstmt.setString(2, title);
+											pstmt.setString(3, superEmail);
+											pstmt.setString(4, superMobileNumber);
+											pstmt.setString(5, superCompany);
+											pstmt.setString(6, superComAddress);
+				
 											pstmt.executeUpdate();
-											response.sendRedirect("studentDetails.jsp");
+											response.sendRedirect("superDetails.jsp");
 										}
 										%>
 									</form>
@@ -307,7 +268,30 @@ con = DriverManager.getConnection(host, "root", "11111");
 	<!-- Main JS-->
 	<script src="js/main.js"></script>
 
-	
+	<!-- 	<script>
+			function validateForm() {
+				let x = document.forms["studentform1"]["studentId"].value;
+				if (x == "") {
+					alert("Student Id must be filled out");
+					return false;
+				}
+				let y = document.forms["studentform1"]["studentId"].value;
+				if (y == "") {
+					alert("Name must be filled out");
+					return false;
+				}
+				let z = document.forms["studentform1"]["studentId"].value;
+				if (z == "") {
+					alert("Name must be filled out");
+					return false;
+				}
+				let a = document.forms["studentform1"]["studentId"].value;
+				if (a == "") {
+					alert("Name must be filled out");
+					return false;
+				}
+			}
+		</script> -->
 </html>
 <!-- end document-->
 

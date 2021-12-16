@@ -152,15 +152,14 @@ ResultSet resultSet = null;
 			<header class="header-desktop">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<div class="header-wrap"
-							style="display: flex; justify-content: right; align-items: right;">
-							<!-- <form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search"
+						<div class="header-wrap">
+							<form class="form-header" action="" method="POST">
+								<!-- <input class="au-input au-input--xl" type="text" name="search"
 									placeholder="Search for datas &amp; reports..." />
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form> -->
+								</button> -->
+							</form>
 							<div class="header-button">
 								<div class="noti-wrap">
 									<div class="noti__item js-item-menu">
@@ -274,23 +273,30 @@ ResultSet resultSet = null;
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<img src="images/icon/saman.jpg" alt="saman" />
+											<img src="images/icon/avatar-08.jpg" alt="saman" />
 										</div>
+										<%
+										String email = (String) session.getAttribute("email");
+										%>
 										<div class="content">
-											<a class="js-acc-btn" href="#">Saman Gunawardana</a>
+											<a class="js-acc-btn" href="#"><%
+															out.println(email);
+															%></a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <img src="images/icon/saman.jpg"
-														alt="saman" />
+													<a href="#"> <img src="images/icon/avatar-08.jpg" alt="saman" />
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-														<a href="#">Saman Gunawardana</a>
+														<a href="#">
+															<%
+															out.println(email);
+															%>
+														</a>
 													</h5>
-													<span class="email">saman.g@sliit.lk</span>
 												</div>
 											</div>
 											<div class="account-dropdown__body">
@@ -304,7 +310,7 @@ ResultSet resultSet = null;
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
-												<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+												<a href="adminLogout.jsp"> <i class="zmdi zmdi-power"></i>Logout
 												</a>
 											</div>
 										</div>
@@ -351,7 +357,7 @@ ResultSet resultSet = null;
 										class="table table-borderless table-striped table-earning">
 										<thead>
 											<tr>
-												<th class="text-right" >Student ID</th>
+												<th class="text-right">Student ID</th>
 												<th class="text-right">Full Name</th>
 												<th class="text-right">Specialization</th>
 												<th class="text-right">Student E-Mail</th>
@@ -361,8 +367,8 @@ ResultSet resultSet = null;
 												<th class="text-right">Current Year of Registration</th>
 												<th class="text-right">Plan to Complete 2nd Year</th>
 												<th class="text-right">Period of Complete 2nd Year</th>
-												<th class="text-right">Update</th>
-												<th class="text-right">Delete</th>
+												<th class="text-left">Update</th>
+												<th class="text-left">Delete</th>
 											</tr>
 											</thead>
 											<tbody>

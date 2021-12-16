@@ -247,7 +247,7 @@
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<img src="images/icon/saman.jpg" alt="saman" />
+											<img src="images/icon/avatar-08.jpg" alt="saman" />
 										</div>
 										<%
 										String email = (String) session.getAttribute("email");
@@ -260,8 +260,7 @@
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <img src="images/icon/saman.jpg"
-														alt="saman" />
+													<a href="#"> <img src="images/icon/avatar-08.jpg" alt="saman" />
 													</a>
 												</div>
 												<div class="content">

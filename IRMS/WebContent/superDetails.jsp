@@ -145,15 +145,14 @@ ResultSet resultSet = null;
 			<header class="header-desktop">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<div class="header-wrap"
-							style="display: flex; justify-content: right; align-items: right;">
-							<!-- <form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search"
+						<div class="header-wrap">
+							<form class="form-header" action="" method="POST">
+								<!-- <input class="au-input au-input--xl" type="text" name="search"
 									placeholder="Search for datas &amp; reports..." />
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form> -->
+								</button> -->
+							</form>
 							<div class="header-button">
 								<div class="noti-wrap">
 									<div class="noti__item js-item-menu">
@@ -267,23 +266,30 @@ ResultSet resultSet = null;
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<img src="images/icon/saman.jpg" alt="saman" />
+											<img src="images/icon/avatar-08.jpg" alt="saman" />
 										</div>
+										<%
+										String email = (String) session.getAttribute("email");
+										%>
 										<div class="content">
-											<a class="js-acc-btn" href="#">Saman Gunawardana</a>
+											<a class="js-acc-btn" href="#"><%
+															out.println(email);
+															%></a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <img src="images/icon/saman.jpg"
-														alt="saman" />
+													<a href="#"> <img src="images/icon/avatar-08.jpg" alt="saman" />
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-														<a href="#">Saman Gunawardana</a>
+														<a href="#">
+															<%
+															out.println(email);
+															%>
+														</a>
 													</h5>
-													<span class="email">saman.g@sliit.lk</span>
 												</div>
 											</div>
 											<div class="account-dropdown__body">
@@ -297,7 +303,7 @@ ResultSet resultSet = null;
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
-												<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+												<a href="adminLogout.jsp"> <i class="zmdi zmdi-power"></i>Logout
 												</a>
 											</div>
 										</div>
@@ -329,8 +335,8 @@ ResultSet resultSet = null;
 								<h2 class="title-1 m-b-25">Summary</h2>
 								<form class="form-header" action="" method="get"
 									style="margin-bottom: 25px;">
-									<input class="au-input au-input--xl" type="text" name="search1"
-										placeholder="Use Student ID or Email..." />
+									<input class="au-input au-input--xl" type="text" name="search2"
+										placeholder="Search Here..." />
 									<button class="au-btn--submit" type="submit">
 										<i class="zmdi zmdi-search"></i>
 									</button>
@@ -344,12 +350,14 @@ ResultSet resultSet = null;
 										class="table table-borderless table-striped table-earning">
 										<thead>
 											<tr>
-												<th class="text-right">Supervisor Name</th>
-												<th class="text-right">Title</th>
-												<th class="text-right">Email Address</th>
-												<th class="text-right">Contact No</th>
-												<th class="text-right">Supervisor Company</th>
-												<th class="text-right">Company Address</th>
+												<th >Supervisor Name</th>
+												<th >Title</th>
+												<th >Email Address</th>
+												<th >Contact No</th>
+												<th >Supervisor Company</th>
+												<th >Company Address</th>
+												<th >Update</th>
+												<th >Delete</th>
 											</tr>
 											</thead>
 											<tbody>
@@ -357,8 +365,23 @@ ResultSet resultSet = null;
 											try {
 												Class.forName("com.mysql.jdbc.Driver");
 												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
-												Statement stmt = con.createStatement();
-												ResultSet rs = stmt.executeQuery("select * from admindb.super_details");
+												Statement stmt = null;
+												ResultSet rs = null;
+												stmt = con.createStatement();
+												String query = request.getParameter("search2");
+												String data;
+
+												if (query != null) {
+													data = "select * from super_details where super_name like '%" + query + "%' or super_title like '%" + query
+													+ "%' or super_email like '%" + query + "%' or super_mobile like '%" + query
+													+ "%' or super_company like '%" + query + "%' or super_company_address like '%" + query
+													+ "%'";
+
+												} else {
+													data = "select * from super_details order by super_id asc";
+												}
+
+												rs = stmt.executeQuery(data);
 												while (rs.next()) {
 											%>
 											<tr>
@@ -369,6 +392,10 @@ ResultSet resultSet = null;
 												<td><%=rs.getString("super_mobile")%></td>
 												<td><%=rs.getString("super_company")%></td>
 												<td><%=rs.getString("super_company_address")%></td>
+												<td><a
+													href="updateSuper.jsp?id=<%=rs.getString("super_id")%>">update</a></td>
+												<td><a
+													href="deleteSuper.jsp?id=<%=rs.getString("super_id")%>">Delete</a></td>
 
 											</tr>
 											<%
@@ -390,14 +417,12 @@ ResultSet resultSet = null;
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
 			<!-- END MAIN CONTENT-->
 			<!-- END PAGE CONTAINER-->
 		</div>
-
 	</div>
 
 	<!-- Jquery JS-->

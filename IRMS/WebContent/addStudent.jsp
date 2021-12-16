@@ -149,15 +149,14 @@
 			<header class="header-desktop">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<div class="header-wrap"
-							style="display: flex; justify-content: right; align-items: right;">
-							<!-- <form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search"
+						<div class="header-wrap">
+							<form class="form-header" action="" method="POST">
+								<!-- <input class="au-input au-input--xl" type="text" name="search"
 									placeholder="Search for datas &amp; reports..." />
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form> -->
+								</button> -->
+							</form>
 							<div class="header-button">
 								<div class="noti-wrap">
 									<div class="noti__item js-item-menu">
@@ -271,23 +270,32 @@
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<img src="images/icon/saman.jpg" alt="saman" />
+											<img src="images/icon/avatar-08.jpg" alt="saman" />
 										</div>
+										<%
+										String email = (String) session.getAttribute("email");
+										%>
 										<div class="content">
-											<a class="js-acc-btn" href="#">Saman Gunawardana</a>
+											<a class="js-acc-btn" href="#">
+												<%
+												out.println(email);
+												%>
+											</a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <img src="images/icon/saman.jpg"
+													<a href="#"> <img src="images/icon/avatar-08.jpg"
 														alt="saman" />
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-														<a href="#">Saman Gunawardana</a>
+														<a href="#"> <%
+ out.println(email);
+ %>
+														</a>
 													</h5>
-													<span class="email">saman.g@sliit.lk</span>
 												</div>
 											</div>
 											<div class="account-dropdown__body">
@@ -301,7 +309,7 @@
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
-												<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+												<a href="adminLogout.jsp"> <i class="zmdi zmdi-power"></i>Logout
 												</a>
 											</div>
 										</div>
@@ -328,7 +336,8 @@
 								<div class="card-body">
 									<h2 class="title">Registration Info</h2>
 									<form name="studentform1" method="post"
-										action="addStudentProcess.jsp">
+										action="addStudentProcess.jsp"
+										onsubmit="return validateForm()">
 
 										<div class="col-8">
 											<div class="input-group">
@@ -348,7 +357,7 @@
 											<div class="input-group">
 												<div class="rs-select2 js-select-simple select--no-search">
 													<label for="email" style="font-size: 1.1rem;">Specialization</label><select
-														name="specialization">
+														name="specialization" required>
 														<option disabled="disabled" selected="selected">--
 															Select --</option>
 														<option value="IT">IT</option>
@@ -398,7 +407,7 @@
 											<div class="input-group">
 												<div class="rs-select2 js-select-simple select--no-search">
 													<label for="email" style="font-size: 1.1rem;">Current
-														Year of Registration</label><select name="currentYear">
+														Year of Registration</label><select name="currentYear" required>
 														<option disabled="disabled" selected="selected">--
 															Select --</option>
 														<option value="Year 1">Year 1</option>
@@ -426,7 +435,8 @@
 											<div class="input-group">
 												<div class="rs-select2 js-select-simple select--no-search">
 													<label for="email" style="font-size: 1.1rem;">Period
-														of Complete 2nd Year</label><select name="periodComplete2year">
+														of Complete 2nd Year</label><select name="periodComplete2year"
+														required>
 														<option disabled="disabled" selected="selected">--
 															Select --</option>
 														<option value="January - June">January - June</option>
@@ -462,6 +472,7 @@
 
 		<!-- Jquery JS-->
 		<script src="vendor/jquery/jquery.min.js"></script>
+
 		<!-- Vendor JS-->
 		<script src="vendor/select2/select2.min.js"></script>
 		<script src="vendor/datepicker/moment.min.js"></script>
@@ -472,32 +483,81 @@
 
 		<!-- Jquery JS-->
 		<script src="vendor/jquery-3.2.1.min.js"></script>
+
 		<!-- Bootstrap JS-->
 		<script src="vendor/bootstrap-4.1/popper.min.js"></script>
 		<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+
 		<!-- Vendor JS       -->
-		<script src="vendor/slick/slick.min.js">
-			
-		</script>
+		<script src="vendor/slick/slick.min.js"></script>
 		<script src="vendor/wow/wow.min.js"></script>
 		<script src="vendor/animsition/animsition.min.js"></script>
 		<script
-			src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-			
-		</script>
+			src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 		<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-		<script src="vendor/counter-up/jquery.counterup.min.js">
-			
-		</script>
+		<script src="vendor/counter-up/jquery.counterup.min.js"></script>
 		<script src="vendor/circle-progress/circle-progress.min.js"></script>
 		<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
 		<script src="vendor/chartjs/Chart.bundle.min.js"></script>
-		<script src="vendor/select2/select2.min.js">
-			
-		</script>
+		<script src="vendor/select2/select2.min.js"></script>
 
 		<!-- Main JS-->
 		<script src="js/main.js"></script>
+
+		<script>
+function validateForm() {
+  let x = document.forms["studentform1"]["studentId"].value;
+  if (x == "" x >= 8) {
+    alert("Student Id must be filled out");
+    return false;
+  }
+  let y = document.forms["studentform1"]["studentName"].value;
+  if (y == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+  let z = document.forms["studentform1"]["specialization"].value;
+  if (z == "") {
+    alert("Please Choose Specialization");
+    return false;
+  }
+  let a = document.forms["studentform1"]["studentEmail"].value;
+  if (a == "") {
+    alert("Student Email must be filled out");
+    return false;
+  }
+  let b = document.forms["studentform1"]["supervisorEmail"].value;
+  if (b == "") {
+    alert("Supervisor Email must be filled out");
+    return false;
+  }
+  let c = document.forms["studentform1"]["stuMobileNumber"].value;
+  if (c == "") {
+    alert("Please Enter Mobile");
+    return false;
+  }
+  let d = document.forms["studentform1"]["internshipStartDate"].value;
+  if (d == "") {
+    alert("Please Choose Internship Start Date");
+    return false;
+  }
+  let e = document.forms["studentform1"]["currentYear"].value;
+  if (e == "") {
+    alert("Please Choose Current Year");
+    return false;
+  }
+  let f = document.forms["studentform1"]["plantoComplete2ndYear"].value;
+  if (f == "") {
+    alert("Please Choose Plan to Complete 2nd Year");
+    return false;
+  }
+  let g = document.forms["studentform1"]["periodComplete2year"].value;
+  if (g == "") {
+    alert("Please Choose Period Complete 2nd year");
+    return false;
+  }
+}
+</script>
 </body>
 
 </html>
