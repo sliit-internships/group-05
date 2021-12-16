@@ -20,7 +20,7 @@ String driver = "com.mysql.jdbc.Driver";
 String connectionUrl = "jdbc:mysql://localhost:3306/";
 String database = "admindb";
 String userid = "root";
-String password = "11111";
+String password = "";
 try {
 	Class.forName(driver);
 } catch (ClassNotFoundException e) {
@@ -73,8 +73,8 @@ ResultSet resultSet = null;
 			<div class="header-mobile__bar">
 				<div class="container-fluid">
 					<div class="header-mobile-inner">
-						<a class="logo" href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT
-								IRMS </span>
+						<a class="logo" href="adminHome.jsp" style="font-size: 35px;">
+							<span>SLIIT IRMS </span>
 						</a>
 						<button class="hamburger hamburger--slider" type="button">
 							<span class="hamburger-box"> <span class="hamburger-inner"></span>
@@ -96,6 +96,9 @@ ResultSet resultSet = null;
 							href="superDetails.jsp"> <i class="fas fa-table"></i>Supervisor
 								Details
 						</a></li>
+						<li class=""><a class="js-arrow" href="companyDetails.jsp">
+								<i class="fas fa-table"></i>Company Details
+						</a></li>
 						<li><a href="#"> <i class="far fa-check-square"></i>Forms
 								Details
 						</a></li>
@@ -111,7 +114,8 @@ ResultSet resultSet = null;
 		<!-- MENU SIDEBAR-->
 		<aside class="menu-sidebar d-none d-lg-block">
 			<div class="logo">
-				<a href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT IRMS </span>
+				<a href="adminHome.jsp" style="font-size: 35px;"> <span>SLIIT
+						IRMS </span>
 				</a>
 			</div>
 			<div class="menu-sidebar__content js-scrollbar1">
@@ -127,8 +131,11 @@ ResultSet resultSet = null;
 							href="superDetails.jsp"> <i class="fas fa-table"></i>Supervisor
 								Details
 						</a></li>
-						<li><a href="#"> <i class="far fa-check-square"></i>Forms
-								Details
+						<li class=""><a class="js-arrow" href="companyDetails.jsp">
+								<i class="fas fa-table"></i>Company Details
+						</a></li>
+						<li><a href="formDetails.jsp"> <i
+								class="far fa-check-square"></i>Forms Details
 						</a></li>
 						<li><a href="adminCalander.jsp"> <i
 								class="fas fa-calendar-alt"></i>Calendar
@@ -267,23 +274,32 @@ ResultSet resultSet = null;
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<img src="images/icon/saman.jpg" alt="saman" />
+											<img src="images/icon/avatar-08.jpg" alt="saman" />
 										</div>
+										<%
+										String email = (String) session.getAttribute("email");
+										%>
 										<div class="content">
-											<a class="js-acc-btn" href="#">Saman Gunawardana</a>
+											<a class="js-acc-btn" href="#">
+												<%
+												out.println(email);
+												%>
+											</a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <img src="images/icon/saman.jpg"
+													<a href="#"> <img src="images/icon/avatar-08.jpg"
 														alt="saman" />
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-														<a href="#">Saman Gunawardana</a>
+														<a href="#"> <%
+ out.println(email);
+ %>
+														</a>
 													</h5>
-													<span class="email">saman.g@sliit.lk</span>
 												</div>
 											</div>
 											<div class="account-dropdown__body">
@@ -297,7 +313,7 @@ ResultSet resultSet = null;
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
-												<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+												<a href="adminLogout.jsp"> <i class="zmdi zmdi-power"></i>Logout
 												</a>
 											</div>
 										</div>
@@ -334,7 +350,7 @@ ResultSet resultSet = null;
 									<button class="au-btn--submit" type="submit">
 										<i class="zmdi zmdi-search"></i>
 									</button>
-									<a href="addSupervisor.jsp" style="margin-left: 600px"
+									<a href="addSupervisor.jsp" style="margin-left: 20px"
 										class="au-btn--submit" type="submit"> <i
 										class="zmdi zmdi-plus"></i>
 									</a>
@@ -351,24 +367,44 @@ ResultSet resultSet = null;
 												<th class="text-right">Supervisor Company</th>
 												<th class="text-right">Company Address</th>
 											</tr>
-											</thead>
-											<tbody>
+										</thead>
+										<tbody>
 											<%
 											try {
 												Class.forName("com.mysql.jdbc.Driver");
-												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
-												Statement stmt = con.createStatement();
-												ResultSet rs = stmt.executeQuery("select * from admindb.super_details");
+												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "");
+												Statement stmt = null;
+												ResultSet rs = null;
+												stmt = con.createStatement();
+												String query = request.getParameter("search2");
+												String data;
+
+												if (query != null) {
+													data = "select * from super_details where super_name like '%" + query + "%' or super_title like '%" + query
+													+ "%' or super_email like '%" + query + "%' or super_mobile like '%" + query
+													+ "%' or super_company like '%" + query + "%' or super_company_address like '%" + query + "%'";
+
+												} else {
+													data = "select * from super_details order by super_id asc";
+												}
+
+												rs = stmt.executeQuery(data);
 												while (rs.next()) {
 											%>
 											<tr>
-												
+
 												<td><%=rs.getString("super_name")%></td>
 												<td><%=rs.getString("super_title")%></td>
 												<td><%=rs.getString("super_email")%></td>
 												<td><%=rs.getString("super_mobile")%></td>
 												<td><%=rs.getString("super_company")%></td>
 												<td><%=rs.getString("super_company_address")%></td>
+												<td><a
+													href="updateSuper.jsp?id=<%=rs.getString("super_id")%>">update</a></td>
+												<td><a
+													href="deleteSuper.jsp?id=<%=rs.getString("super_id")%>">Delete</a></td>
+
+
 
 											</tr>
 											<%

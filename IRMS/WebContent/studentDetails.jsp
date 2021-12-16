@@ -99,6 +99,10 @@ ResultSet resultSet = null;
 						<li><a href="superDetails.jsp"> <i class="fas fa-table"></i>Supervisor
 								Details
 						</a></li>
+						 <li class=""><a class="js-arrow"
+							href="companyDetails.jsp"> <i class="fas fa-table"></i>Company
+								Details
+						</a></li>
 						<li><a href="#"> <i class="far fa-check-square"></i>Forms
 								Details
 						</a></li>
@@ -132,7 +136,11 @@ ResultSet resultSet = null;
 						<li><a href="superDetails.jsp"> <i class="fas fa-table"></i>Supervisor
 								Details
 						</a></li>
-						<li><a href="#"> <i class="far fa-check-square"></i>Forms
+						 <li class=""><a class="js-arrow"
+							href="companyDetails.jsp"> <i class="fas fa-table"></i>Company
+								Details
+						</a></li>
+						<li><a href="formDetails.jsp"> <i class="far fa-check-square"></i>Forms
 								Details
 						</a></li>
 						<li><a href="adminCalander.jsp"> <i
@@ -152,15 +160,14 @@ ResultSet resultSet = null;
 			<header class="header-desktop">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<div class="header-wrap"
-							style="display: flex; justify-content: right; align-items: right;">
-							<!-- <form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search"
+						<div class="header-wrap">
+							<form class="form-header" action="" method="POST">
+								<!-- <input class="au-input au-input--xl" type="text" name="search"
 									placeholder="Search for datas &amp; reports..." />
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form> -->
+								</button> -->
+							</form>
 							<div class="header-button">
 								<div class="noti-wrap">
 									<div class="noti__item js-item-menu">
@@ -274,23 +281,30 @@ ResultSet resultSet = null;
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<img src="images/icon/saman.jpg" alt="saman" />
+											<img src="images/icon/avatar-08.jpg" alt="saman" />
 										</div>
+										<%
+										String email = (String) session.getAttribute("email");
+										%>
 										<div class="content">
-											<a class="js-acc-btn" href="#">Saman Gunawardana</a>
+											<a class="js-acc-btn" href="#"><%
+															out.println(email);
+															%></a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <img src="images/icon/saman.jpg"
-														alt="saman" />
+													<a href="#"> <img src="images/icon/avatar-08.jpg" alt="saman" />
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-														<a href="#">Saman Gunawardana</a>
+														<a href="#">
+															<%
+															out.println(email);
+															%>
+														</a>
 													</h5>
-													<span class="email">saman.g@sliit.lk</span>
 												</div>
 											</div>
 											<div class="account-dropdown__body">
@@ -304,7 +318,7 @@ ResultSet resultSet = null;
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
-												<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+												<a href="adminLogout.jsp"> <i class="zmdi zmdi-power"></i>Logout
 												</a>
 											</div>
 										</div>
@@ -341,7 +355,7 @@ ResultSet resultSet = null;
 									<button class="au-btn--submit" type="submit">
 										<i class="zmdi zmdi-search"></i>
 									</button>
-									<a href="addStudent.jsp" style="margin-left: 600px"
+									<a href="addStudent.jsp" style="margin-left: 20px"
 										class="au-btn--submit" type="submit"> <i
 										class="zmdi zmdi-plus"></i>
 									</a>
@@ -351,25 +365,25 @@ ResultSet resultSet = null;
 										class="table table-borderless table-striped table-earning">
 										<thead>
 											<tr>
-												<th class="text-right" >Student ID</th>
+												<th class="text-right">Student ID</th>
 												<th class="text-right">Full Name</th>
-												<th class="text-right">Specialization</th>
 												<th class="text-right">Student E-Mail</th>
-												<th class="text-right">Supervisor E-Mail</th>
 												<th class="text-right">Mobile Numbers</th>
-												<th class="text-right">Internship Start Date</th>
 												<th class="text-right">Current Year of Registration</th>
-												<th class="text-right">Plan to Complete 2nd Year</th>
 												<th class="text-right">Period of Complete 2nd Year</th>
-												<th class="text-right">Update</th>
-												<th class="text-right">Delete</th>
+												<th class="text-right">Specialization</th>
+												<th class="text-right">Found Internship</th>
+												<th class="text-right">Supervisor E-Mail</th>
+												<th class="text-right">Approval</th>
+												<th class="text-left">Update</th>
+												<th class="text-left">Delete</th>
 											</tr>
 											</thead>
 											<tbody>
 											<%
 											try {
 												Class.forName("com.mysql.jdbc.Driver");
-												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
+												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "");
 												Statement stmt = null;
 												ResultSet rs = null;
 												stmt = con.createStatement();
@@ -377,34 +391,34 @@ ResultSet resultSet = null;
 												String data;
 
 												if (query != null) {
-													data = "select * from student_details where studentId like '%" + query + "%' or studentName like '%" + query
-													+ "%' or specialization like '%" + query + "%' or studentEmail like '%" + query
-													+ "%' or supervisorEmail like '%" + query + "%' or stuMobileNumber like '%" + query
-													+ "%'or stuMobileNumber like '%" + query + "%'or stuMobileNumber like '%" + query
-													+ "%'or stuMobileNumber like '%" + query + "%'or stuMobileNumber like '%" + query + "%'";
+													data = "select * from internship_registered_student where id like '%" + query + "%' or name like '%" + query
+													+ "%' or email like '%" + query + "%' or mobile like '%" + query
+													+ "%' or year like '%" + query + "%' or semester like '%" + query
+													+ "%'or specialization like '%" + query + "%'or foundintern like '%" + query
+													+ "%'or supervisoremail like '%" + query + "%'or acceptancetype like '%" + query + "%'";
 
 												} else {
-													data = "select * from student_details order by s_id asc";
+													data = "select * from internship_registered_student order by id asc";
 												}
 
 												rs = stmt.executeQuery(data);
 												while (rs.next()) {
 											%>
 											<tr>
-												<td><%=rs.getString("studentId")%></td>
-												<td><%=rs.getString("studentName")%></td>
+												<td><%=rs.getString("id")%></td>
+												<td><%=rs.getString("name")%></td>
+												<td><%=rs.getString("email")%></td>
+												<td><%=rs.getString("mobile")%></td>
+												<td><%=rs.getString("year")%></td>
+												<td><%=rs.getString("semester")%></td>
 												<td><%=rs.getString("specialization")%></td>
-												<td><%=rs.getString("studentEmail")%></td>
-												<td><%=rs.getString("supervisorEmail")%></td>
-												<td><%=rs.getString("stuMobileNumber")%></td>
-												<td><%=rs.getString("internshipStartDate")%></td>
-												<td><%=rs.getString("currentYear")%></td>
-												<td><%=rs.getString("plantoComplete2ndYear")%></td>
-												<td><%=rs.getString("periodComplete2year")%></td>
+												<td><%=rs.getString("foundintern")%></td>
+												<td><%=rs.getString("supervisoremail")%></td>
+												<td><%=rs.getString("acceptancetype")%></td>
 												<td><a
-													href="updateStudent.jsp?id=<%=rs.getString("s_id")%>">update</a></td>
+													href="updateStudent.jsp?id=<%=rs.getString("email")%>">update</a></td>
 												<td><a
-													href="deleteStudent.jsp?id=<%=rs.getString("s_id")%>">Delete</a></td>
+													href="deleteStudent.jsp?id=<%=rs.getString("email")%>">Delete</a></td>
 
 											</tr>
 											<%

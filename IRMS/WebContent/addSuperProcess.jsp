@@ -17,7 +17,7 @@
 	<%
 	try {
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "11111");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "");
 		Statement stmt = con.createStatement();
 
 		String superName = request.getParameter("superName");

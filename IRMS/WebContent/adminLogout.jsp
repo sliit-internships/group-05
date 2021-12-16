@@ -17,7 +17,7 @@ response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
 		
 if(session.getAttribute("email")==null);
-response.sendRedirect("systemLogin.jsp");
+response.sendRedirect("studentLogin.jsp");
 
 %>
 </body>

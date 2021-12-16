@@ -72,7 +72,7 @@
 					<!-- end of dropdown menu -->
 				</ul>
 				<span class="nav-item"> <a class="btn-outline-sm"
-					href="systemLogin.jsp">LOG IN</a>
+					href="studentLogin.jsp">LOG IN</a>
 				</span>
 			</div>
 		</div>
@@ -91,7 +91,7 @@
 						<div class="text-container">
 							<h1>WELCOME SLIIT IRM SYSTEM</h1>
 							<p class="p-large">SLIIT IRM SYSTEM</p>
-							<a class="btn-solid-lg page-scroll" href="systemRegister.jsp">SIGN UP</a>
+							<a class="btn-solid-lg page-scroll" href="systemRegPage.jsp">SIGN UP</a>
 						</div>
 						<!-- end of text-container -->
 					</div>

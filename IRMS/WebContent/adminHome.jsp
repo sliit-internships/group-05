@@ -106,8 +106,11 @@
 						<li><a href="superDetails.jsp"> <i class="fas fa-table"></i>Supervisor
 								Details
 						</a></li>
-						<li><a href="#"> <i class="far fa-check-square"></i>Forms
-								Details
+						<li class=""><a class="js-arrow" href="companyDetails.jsp">
+								<i class="fas fa-table"></i>Company Details
+						</a></li>
+						<li><a href="formDetails.jsp"> <i
+								class="far fa-check-square"></i>Forms Details
 						</a></li>
 						<li><a href="adminCalander.jsp"> <i
 								class="fas fa-calendar-alt"></i>Calendar
@@ -128,11 +131,11 @@
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<form class="form-header" action="" method="POST">
-								<!-- <input class="au-input au-input--xl" type="text" name="search"
+								<input class="au-input au-input--xl" type="text" name="search"
 									placeholder="Search for datas &amp; reports..." />
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
-								</button> -->
+								</button>
 							</form>
 							<div class="header-button">
 								<div class="noti-wrap">
@@ -247,29 +250,30 @@
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<img src="images/icon/saman.jpg" alt="saman" />
+											<img src="images/icon/avatar-08.jpg" alt="saman" />
 										</div>
 										<%
-										String email = (String) session.getAttribute("email");
-										%>
+String email = (String) session.getAttribute("email");
+%>
 										<div class="content">
-											<a class="js-acc-btn" href="#"><%
-															out.println(email);
-															%></a>
+											<a class="js-acc-btn" href="#">
+												<%
+out.println(email);
+%>
+											</a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <img src="images/icon/saman.jpg"
+													<a href="#"> <img src="images/icon/avatar-08.jpg"
 														alt="saman" />
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-														<a href="#">
-															<%
-															out.println(email);
-															%>
+														<a href="#"> <%
+out.println(email);
+%>
 														</a>
 													</h5>
 												</div>

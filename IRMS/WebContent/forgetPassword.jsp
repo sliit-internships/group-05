@@ -1,193 +1,88 @@
+
+<%@page import="org.apache.catalina.filters.ExpiresFilter.XServletOutputStream"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@ page import="java.sql.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Reset Password</title>
-<link rel="stylesheet" href="./css/ForgetPassword.css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Count Rows JSP</title>
 
-<style>
-::placeholder {
-	color: gray;
-	font-size: 15px;
-	margin: 0 auto;
-}
 
-select, option {
-	display: block;
-	margin: 0 auto;
-	margin-bottom: 40px;
-	margin-top:40px;
-	color: #505050;
-	background-color: #efeff4;
-	border: none;
-	border-radius: 5px;
-	font-size: 0.95rem;
-	padding: 7px 0 5px 7px;
-}
-</style>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="./css/PasswordJquary.css">
-<link rel="stylesheet" type="text/css" href="./css/password_strength.css">
 
 </head>
 <body>
 
-	<div class="wrapper">
-		<!-- <a href="#" class="menu-toggle"> <span class="bar"></span> <span
-			class="bar"></span> <span class="bar"></span>
-		</a> -->
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script type="text/javascript">
 
-		<div class="quote-wrapper"></div>
-		<!-- end quote-wrapper -->
-
-		<div class="form-wrapper">
-			<div>
-				<h4 style="margin: -5px">Are You Want to Reset Your Password</h4>
-			</div>
-			<h1 class="form-title">Please Fill this Form</h1>
-
-			<form name="form" action="forgetPasswordAction" method="post">
-
-				<div class="form-group" >
-					<label for="email">SLIIT Student Email</label> <input type="text"
-						name="email" id="email" class="w-100"
-						placeholder="itxxxxxxxx@my.sliit.lk" required> <span
-						class="check-icon"></span>
-				</div>
-
-				<div class="form-group mb-1" style="margin-top:-5px;">
-				<label for="security question" style="display: flex; justify-content: right; align-items: right;">Security Question</label>
-					<select class="w-100" name="securityQuestion">
-						<option class="w-100" value="What was your first car ?">What
-							was your first car ?</option>
-						<option class="w-100"
-							value="What was the name of your first pet ?">What was
-							the name of your first pet ?</option>
-						<option class="w-100" value="What was your first school name ?">What
-							was your first school name ?</option>
-						<option class="w-100" value="What was your mothers birthday ?">What
-							was your mothers birthday ?</option>
-					</select> <span class="check-icon"></span>
-				</div>
-				<div class="form-group mb-1" style="margin-top:-5px;">
-					<label for="answer" >Your Answer</label> <input type="text"
-						name="answer" id="answer" class="w-100"
-						placeholder="answer" required> <span class="check-icon"></span>
-				</div>
-				<div class="form-group mb-1" style="margin-top:35px;">
-					<label for="new password">Enter Your New Password</label> <input type="password"
-						name="newPassword" id="id_password" class="w-100"
-						placeholder="enter password" required><i class="far fa-eye" id="togglePassword" style=" margin-left: -20px; cursor: pointer;"></i> <span class="check-icon"></span>
-				</div>
-				<div class="form-group mb-1" style="margin-top:35px;">
-					<label for="reenter password">Re-enter Your New Password</label> <input type="password"
-						name="newPassword1" id="id_password1" class="w-100"
-						placeholder="Re-enter password" required><i class="far fa-eye" id="togglePassword1" style=" margin-left: -20px; cursor: pointer;"></i> <span class="check-icon"></span>
-				</div>
+let x = Math.floor((Math.random() * 99999) + 1);
+document.getElementById("demo").innerHTML = x;
 
 
-				<div class="form-group text-left mb-2" style="margin-top: -10px">
-				</div>
+function sendEmail(){
+Email.send({
 
-				<div class="form-group mb-0">
-					<input type="submit" value="Save" class="w-100" id="submit"
-						onClick="return checkEquel()" onClick="validateform()">
-				</div>
-			</form>
-			<small>You Want to Login Please <a href="systemLogin.jsp">Click here</a></small>
-			<%
-			String msg = request.getParameter("msg");
-			if("done".equals(msg))
-			{
-			%>
-			<h3 style="color:#0000cc;">Password Change Successfully...!</h3>
-			<%} %>
-			<%
-			if("invalid".equals(msg))
-			{
-			%>
-			<h3 style="color:#ff3300;">Something went wrong...!<br> Try again...!</h3>
-			<%} %>
-		</div>
-		<!-- end form-wrapper -->
-	</div>
-	<!-- end wrapper -->
+Host : "smtp.gmail.com",
+SecureToken:"6b588f3d-d58e-49b0-b954-3b05bd91e4cb",
+Username : "sliit.irms@gmail.com",
+Password : "zhfflczoimlqazis",
+To : document.getElementById('supemail').value,
+From : "sliit.irms@gmail.com",
+Subject : "Forgot Password",
+Body :  "This "+document.getElementById('id').value+" student "+ x +"has been mentioned you as the supervisor.Please follow below provided link to register with IRMS system"
+}).then(
+message => alert(message)
+);
+}
 
- <script>
-		function checkEquel() {
-			var p = document.form.newPassword.value;
-			var p1 = document.form.newPassword1.value;
 
-			if (p == p1) {
-				return true;
-			} else {
-				alert("Password are not equal! Please Check...!");
-				return false;
-			}
+</script>
+
+	<%
+	try {
+		System.out.println("46");
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "");
+		Statement st = con.createStatement();
+		String email = request.getParameter("email");
+		String strQuery = "SELECT password FROM studentsystemreg where email='" + email + "'";
+		PreparedStatement ps = con.prepareStatement(strQuery);
+		//ps.executeUpdate();
+		
+		/* rs.next(); */
+		System.out.println("54");
+		/* String Countrow = rs.getString(1); */
+		System.out.println("56");
+		
+	
+		ResultSet rs = st.executeQuery(strQuery);
+		System.out.println(rs);
+
+		
+		if (strQuery.isEmpty()) {
+			/*mail code
+			paste your mail code here
+			------------------
+			Mail code*/
+			System.out.println("if");
+			
+			
+			
+			out.println("Invalid Email Id !");
+			
+		} else {
+			out.println("Password send to your email id successfully !");
+			out.println(rs);
+			
 		}
-	</script>
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	%>
 	
-	<script>
-		function validateform() {
-			var email = document.form.email.value;
-			var password = document.form.newPassword.value;
-			var password1 = document.form.newPassword1.value;
-			
-			if (email == null || email == "") {
-				alert("SLIIT Email can't be blank");
-				email.focus;
-				return false;
-			} 
-			if (password.length < 6) {
-				alert("Password must be at least 6 characters long & a mix of letters (upper and lower case), numbers, and symbols");
-				password.focus;
-				return false;
-			} 
-			if (password1.length < 6) {
-				alert("Password must be at least 6 characters long & a mix of letters (upper and lower case), numbers, and symbols");
-				password1.focus;
-				return false;
-			}
-			
-			var email = document.getElementById('email');
-			var filter = /^([a-zA-Z0-9_\-\.]+)\+?([a-zA-Z0-9_\-\.]+)@sliit.lk$/;
-			
-			if (!filter.test(email.value)) {
-				alert('Please provide a valid SLIIT Email address');
-				email.focus;
-				return false;
-			}
-		}
-	</script>
 	
-	<script>
-	  const togglePassword = document.querySelector('#togglePassword');
-	  const password = document.querySelector('#id_password');
-	
-	  togglePassword.addEventListener('click', function (e) {
-		    // toggle the type attribute
-		    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-		    password.setAttribute('type', type);
-		    // toggle the eye slash icon
-		    this.classList.toggle('fa-eye-slash');
-		});
-	  
-	 
-	  const password1 = document.querySelector('#id_password1');
-	  const togglePassword1 = document.querySelector('#togglePassword1');
-	  
-	  togglePassword1.addEventListener('click', function (e) {
-		    // toggle the type attribute
-		    const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
-		    password1.setAttribute('type', type);
-		    // toggle the eye slash icon
-		    this.classList.toggle('fa-eye-slash');
-		});
-	   
-	  </script>
-
 </body>
 </html>

@@ -147,15 +147,14 @@
 			<header class="header-desktop">
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
-						<div class="header-wrap"
-							style="display: flex; justify-content: right; align-items: right;">
-							<!-- <form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search"
+						<div class="header-wrap">
+							<form class="form-header" action="" method="POST">
+								<!-- <input class="au-input au-input--xl" type="text" name="search"
 									placeholder="Search for datas &amp; reports..." />
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form> -->
+								</button> -->
+							</form>
 							<div class="header-button">
 								<div class="noti-wrap">
 									<div class="noti__item js-item-menu">
@@ -269,23 +268,30 @@
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<img src="images/icon/saman.jpg" alt="saman" />
+											<img src="images/icon/avatar-08.jpg" alt="saman" />
 										</div>
+										<%
+										String email = (String) session.getAttribute("email");
+										%>
 										<div class="content">
-											<a class="js-acc-btn" href="#">Saman Gunawardana</a>
+											<a class="js-acc-btn" href="#"><%
+															out.println(email);
+															%></a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <img src="images/icon/saman.jpg"
-														alt="saman" />
+													<a href="#"> <img src="images/icon/avatar-08.jpg" alt="saman" />
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-														<a href="#">Saman Gunawardana</a>
+														<a href="#">
+															<%
+															out.println(email);
+															%>
+														</a>
 													</h5>
-													<span class="email">saman.g@sliit.lk</span>
 												</div>
 											</div>
 											<div class="account-dropdown__body">
@@ -299,7 +305,7 @@
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
-												<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+												<a href="adminLogout.jsp"> <i class="zmdi zmdi-power"></i>Logout
 												</a>
 											</div>
 										</div>
@@ -340,7 +346,8 @@
 												<div class="rs-select2 js-select-simple select--no-search">
 													<label for="email" style="font-size: 1.1rem;">Title</label><select
 														name="title">
-														<option disabled="disabled" selected="selected">-- Select --</option>
+														<option disabled="disabled" selected="selected">--
+															Select --</option>
 														<option value="IT manager">IT Manager</option>
 														<option value="IT director">IT Director</option>
 														<option value="Cloud security specialist">Cloud
@@ -382,8 +389,10 @@
 										<div class="col-8">
 											<div class="input-group">
 												<div class="rs-select2 js-select-simple select--no-search">
-													<label for="email" style="font-size: 1.1rem;">Supervisor Company</label><select name="superCompany">
-														<option disabled="disabled" selected="selected">-- Select --</option>
+													<label for="email" style="font-size: 1.1rem;">Supervisor
+														Company</label><select name="superCompany">
+														<option disabled="disabled" selected="selected">--
+															Select --</option>
 														<option value="Company 1">Company 1</option>
 														<option value="Company 2">Company 2</option>
 														<option value="Company 3">Company 3</option>
@@ -401,7 +410,8 @@
 										</div>
 										<div class="col-8">
 											<div class="input-group">
-												<label for="email" style="font-size: 1.1rem;">Company Address</label><input class="input--style-2" type="text"
+												<label for="email" style="font-size: 1.1rem;">Company
+													Address</label><input class="input--style-2" type="text"
 													placeholder="Enter Address" name="superComAddress">
 											</div>
 										</div>
@@ -423,50 +433,49 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
-		<!-- END MAIN CONTENT-->
-		<!-- END PAGE CONTAINER-->
+	</div>
+	<!-- END MAIN CONTENT-->
+	<!-- END PAGE CONTAINER-->
 
 
-		<!-- Jquery JS-->
-		<script src="vendor/jquery/jquery.min.js"></script>
-		<!-- Vendor JS-->
-		<script src="vendor/select2/select2.min.js"></script>
-		<script src="vendor/datepicker/moment.min.js"></script>
-		<script src="vendor/datepicker/daterangepicker.js"></script>
+	<!-- Jquery JS-->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<!-- Vendor JS-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="vendor/datepicker/moment.min.js"></script>
+	<script src="vendor/datepicker/daterangepicker.js"></script>
 
-		<!-- Main JS-->
-		<script src="js/global.js"></script>
+	<!-- Main JS-->
+	<script src="js/global.js"></script>
 
-		<!-- Jquery JS-->
-		<script src="vendor/jquery-3.2.1.min.js"></script>
-		<!-- Bootstrap JS-->
-		<script src="vendor/bootstrap-4.1/popper.min.js"></script>
-		<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-		<!-- Vendor JS       -->
-		<script src="vendor/slick/slick.min.js">
-			
-		</script>
-		<script src="vendor/wow/wow.min.js"></script>
-		<script src="vendor/animsition/animsition.min.js"></script>
-		<script
-			src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-			
-		</script>
-		<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-		<script src="vendor/counter-up/jquery.counterup.min.js">
-			
-		</script>
-		<script src="vendor/circle-progress/circle-progress.min.js"></script>
-		<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-		<script src="vendor/chartjs/Chart.bundle.min.js"></script>
-		<script src="vendor/select2/select2.min.js">
-			
-		</script>
+	<!-- Jquery JS-->
+	<script src="vendor/jquery-3.2.1.min.js"></script>
+	<!-- Bootstrap JS-->
+	<script src="vendor/bootstrap-4.1/popper.min.js"></script>
+	<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+	<!-- Vendor JS       -->
+	<script src="vendor/slick/slick.min.js">
+		
+	</script>
+	<script src="vendor/wow/wow.min.js"></script>
+	<script src="vendor/animsition/animsition.min.js"></script>
+	<script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+		
+	</script>
+	<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+	<script src="vendor/counter-up/jquery.counterup.min.js">
+		
+	</script>
+	<script src="vendor/circle-progress/circle-progress.min.js"></script>
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+	<script src="vendor/chartjs/Chart.bundle.min.js"></script>
+	<script src="vendor/select2/select2.min.js">
+		
+	</script>
 
-		<!-- Main JS-->
-		<script src="js/main.js"></script>
+	<!-- Main JS-->
+	<script src="js/main.js"></script>
 </body>
 
 </html>
